@@ -48,6 +48,7 @@ class menu():
         pi.recorrer()
         if type(pi)==pila:
             self.opcion1(pi=Pila())
+
     def mostrar(self,pi):
         x=pi.eliminar()
         while x!=None:
@@ -84,11 +85,10 @@ class menu():
             while   d!=None:
                 x*=d
                 d=pi.eliminar()
-
-
             print("El factorial es",x,"!")
         except ValueError:
             print("Se esperaba un numero")
+
     def valido(self,dato1,dato2):
         if dato1==None or dato2==None:
             d=False
@@ -109,31 +109,52 @@ class menu():
         arreglo[1]=pilaAuxiliar
         arreglo[2]=pilaFinal
         cont=0
-        print("Bienvenido a las torres de hayo.\nLas reglas son simples, debes mover todas las piesas de una torre a otra, solo puedes mover una pieza, las piezas deben ir de mayor a menor\n")
+        print("Bienvenido a las torres de Hanoi.\nLas reglas son simples, debes mover todas las piesas de una torre a otra, solo puedes mover una pieza, las piezas deben ir de mayor a menor\n")
         while pilaFinal.lleno()==False:
-            print("La torre final esta vacia/incompleta\n")
+            
+            for i in range(len(arreglo)):
+                d=arreglo[i]
+                lis=[]
+                print("\nEl estado de la lista",i+1, "es:")
+                x=d.eliminar()
+                while x!=None:
+                    lis.append(x)
+                    x=d.eliminar()
+                j=len(lis)-1
+                for i in range(len(lis)):
+                    print(lis[i])
+                    d.insertar(lis[j-i])
+
+            print("La torre final esta vacia o incompleta, el juego continua\n")
             if pilaPrincipal.lleno()==True:
                 print("La torre principal esta llena (no aceptara mas discos)")
             elif pilaAuxiliar.lleno()==True:
                 print("La torre auxiliar esta llena (no aceptara mas discos)")
             op=int(input("Seleccione de donde desea mover la ficha Torre 1(Principal) 2(auxiliar) 3(Final)\n"))
-            pil=arreglo[op-1]
-            dis=pil.eliminar()
-            aux=int(input("Seleccione a donde desea mover la ficha Torre 1(Principal) 2(auxiliar) 3(Final)\n"))
-            pol=arreglo[aux-1]
-            dato=pol.eliminar()
-            if dato==None:
-                pol.insertar(dis)
-                cont+=1
+            if arreglo[op-1].vacia()==True:
+                print("La torre",op,"esta vacia. Seleccione otra")
             else:
-                pol.insertar(dato)
-                if self.valido(dis,dato)==True:
+
+                pil=arreglo[op-1]
+                dis=pil.eliminar()
+                aux=int(input("Seleccione a donde desea mover la ficha Torre 1(Principal) 2(auxiliar) 3(Final)\n"))
+                pol=arreglo[aux-1]
+                dato=pol.eliminar()
+                if dato==None:
                     pol.insertar(dis)
                     cont+=1
                 else:
-                    print("No se puede ejecutar el movimiento, el disco volvio a su posicion inicial")
-                    pil.insertar(dis)
+                    pol.insertar(dato)
+                    if self.valido(dis,dato)==True:
+                        pol.insertar(dis)
+                        cont+=1
+                    else:
+                        print("No se puede ejecutar el movimiento, el disco volvio a su posicion inicial")
+                        pil.insertar(dis)
+
+
         print("Felicidades resolviste el juego en",cont,"movimientos")
+      
 
 
 
