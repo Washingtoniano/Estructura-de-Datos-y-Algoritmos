@@ -12,7 +12,7 @@ class Pila():
         self.__arreglo = np.empty(dimension, dtype = int)
         self.__dimension = dimension
     def lleno(self):
-        return self.__dimension>self.__cant
+        return self.__dimension==self.__cant
 
     def insertar(self,dato):
 
@@ -26,13 +26,11 @@ class Pila():
 
     def eliminar(self):
         dato=None
-        if self.vacia() != False: 
+        if self.vacia() == False: 
             dato=self.__arreglo[self.__tope]
             self.__tope -= 1
             self.__cant -= 1
 
-        else:
-            print(" Arreglo vacio")
         return dato
 
     def recorrer(self):

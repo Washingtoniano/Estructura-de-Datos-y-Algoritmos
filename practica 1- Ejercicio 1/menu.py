@@ -90,16 +90,25 @@ class menu():
         except ValueError:
             print("Se esperaba un numero")
     def valido(self,dato1,dato2):
-        return dato1<dato2
+        if dato1==None or dato2==None:
+            d=False
+        else:
+            d=dato1<dato2
+        return d
     
     def opcion4(self,pi):
-        
+        import numpy as np
+        arreglo=np.empty(3,dtype=Pila)
         pilaPrincipal=Pila(3)
         pilaAuxiliar=Pila(3)
         pilaFinal=Pila(3)
         pilaPrincipal.insertar(3)
         pilaPrincipal.insertar(2)
         pilaPrincipal.insertar(1)
+        arreglo[0]=pilaPrincipal
+        arreglo[1]=pilaAuxiliar
+        arreglo[2]=pilaFinal
+        cont=0
         print("Bienvenido a las torres de hayo.\nLas reglas son simples, debes mover todas las piesas de una torre a otra, solo puedes mover una pieza, las piezas deben ir de mayor a menor\n")
         while pilaFinal.lleno()==False:
             print("La torre final esta vacia/incompleta\n")
@@ -107,31 +116,26 @@ class menu():
                 print("La torre principal esta llena (no aceptara mas discos)")
             elif pilaAuxiliar.lleno()==True:
                 print("La torre auxiliar esta llena (no aceptara mas discos)")
-            op=input("Seleccione de donde desea mover la ficha Torre 1(Principal) 2(auxiliar) 3(Final)\n")
-            if op=='1':
-                dis=pilaPrincipal.eliminar()
-            elif op=='2':
-                dis=pilaAuxiliar.eliminar()
-            elif op=='3':
-                dis=pilaFinal.eliminar()
-            aux=input("Seleccione a donde desea mover la ficha Torre 1(Principal) 2(auxiliar) 3(Final)\n")
-            if aux=='1':
-                dato=pilaPrincipal.eliminar()
-                pilaPrincipal.insertar(dato)
+            op=int(input("Seleccione de donde desea mover la ficha Torre 1(Principal) 2(auxiliar) 3(Final)\n"))
+            pil=arreglo[op-1]
+            dis=pil.eliminar()
+            aux=int(input("Seleccione a donde desea mover la ficha Torre 1(Principal) 2(auxiliar) 3(Final)\n"))
+            pol=arreglo[aux-1]
+            dato=pol.eliminar()
+            if dato==None:
+                pol.insertar(dis)
+                cont+=1
+            else:
+                pol.insertar(dato)
                 if self.valido(dis,dato)==True:
-                    pilaPrincipal.insertar(dis)
-            elif aux=='2':
-                dato=pilaAuxiliar.eliminar()
-                pilaAuxiliar.insertar(dato)
-                if self.valido(dis,dato)==True:
-                    pilaAuxiliar.insertar(dis)
-            elif aux=='3':
-                dato=pilaFinal.eliminar()
-                pilaFinal.insertar(dato)
-                if self.valido(dis,dato)==True:
-                    pilaFinal.insertar(dis)
+                    pol.insertar(dis)
+                    cont+=1
+                else:
+                    print("No se puede ejecutar el movimiento, el disco volvio a su posicion inicial")
+                    pil.insertar(dis)
+        print("Felicidades resolviste el juego en",cont,"movimientos")
 
-           
+
 
 
 
