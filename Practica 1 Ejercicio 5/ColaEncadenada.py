@@ -53,6 +53,8 @@ class ColaEnca():
             aux = aux.getSig()
 
         print("\n Se recorrio la cola ")
+    def getCant(self):
+        return self.__cant
 
 
 

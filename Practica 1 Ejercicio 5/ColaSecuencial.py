@@ -46,7 +46,9 @@ class ColaSecu():
      
             for j in range(self.__cantidad):
                 print(self.__arreglo[i])
-                i = (i+1) % self.__dimension           
+                i = (i+1) % self.__dimension    
+    def getCant(self):
+        return self.__cantidad       
         
 
 

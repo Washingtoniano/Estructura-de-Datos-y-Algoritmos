@@ -17,54 +17,79 @@ import random
 
 
 if __name__ =="__main__":
-    pila = ColaEnca()
+    Cola = ColaEnca()
+    """
     import numpy as np
+
     cajas=np.ndarray(3)
     cajas[0]=0
     cajas[1]=0
     cajas[2]=0
+    """
     caj1=0
     caj2=0
     caj3=0
 
-    tiempo=int(input("Tiempo total"))
+    tiempo=int(input("Ingrese tiempo total-> "))
     tiempo=tiempo*60
-    a=random(0,1)
+    llegada=5
+    #a=random.random()
+
     i=0
-    tiempo=0
-    while i<120:
-        0<=a<=(1/5)
-        pila.insertar(i)
-        if caj1==0:
-            x=pila.suprimir()
-            caj1+=1
-        elif caj1<=5:
-            caj1+=1
-        if caj1!=0 and caj2==0:
-            x=pila.suprimir()
-            caj2+=1
-        else:
-            caj2+=1
-        if caj2!=0 and caj1!=0 and caj3==0:
-            x=pila.suprimir()
-            caj3+=1
-        else:
-            caj3+=1
+    temp=0
+    cont=0
+    total=0
+    x=0
+    while i<tiempo:
+        a=random.random()
+        #print(a)
+
+        if 0<=a<=(1/llegada):
+            Cola.insertar(i)
+            if caj1==0:
+                x=Cola.suprimir()
+                temp=i-x
+                cont+=1
+                caj1+=1
+            elif caj1!=0 and caj2==0:
+                x=Cola.suprimir()
+                temp=i-x
+
+                cont+=1
+                caj2+=1
+            elif caj2!=0 and caj1!=0 and caj3==0:
+                x=Cola.suprimir()
+                temp=i-x
+                cont+=1
+                caj3+=1
+
 
         if caj1==5:
             caj1=0
+        elif caj1<5:
+            caj1+=1
         if caj2==5:
-            caja2=0
+            caj2=0
+        elif caj2<5:
+            caj2+=1
         if caj3==5:
             caj3=0 
-        tiempo=i-x
+        elif caj3<5:
+            caj3+=1
+        #Tiempo actual - tiempo en el que ingreso
+        total=total+temp
+            
         i+=1
+    print("Tiempo total de espera ",total,"min")
+    print("Trabajos realizados ",cont)
+    print("Tiempo promedio ",round(total/cont,2))
+    print("Trabajos pendientes",Cola.getCant())
 
 
 
 
 
-
+"""""
     
     #ColaSecuencial = ColaSecu()
 
@@ -84,3 +109,4 @@ if __name__ =="__main__":
     pila.recorrer()
     pila.suprimir()
     pila.recorrer()
+"""""
