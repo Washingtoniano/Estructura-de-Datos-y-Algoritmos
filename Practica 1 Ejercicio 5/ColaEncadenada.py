@@ -1,42 +1,58 @@
 from nodo import nodo
+
 class ColaEnca():
     __comienzo:None
     __cant:int
-    __ultimo:None
+    __ultimo = None
 
-    def __init__(self) -> None:
-        self.__comienzo=None
-        self.__cant=0
-        self.__ultimo=None
+    def __init__(self):
+        self.__comienzo = None
+        self.__cant = 0
+        self.__ultimo = None
 
     def insertar(self,dato):
-        unnodo=nodo(dato)
-        if self.__comienzo==None:
-            self.__comienzo=unnodo
-            self.__ultimo=unnodo
-        else:
-            aux=self.__comienzo
-            while aux.getSiguiente()==None:
-                aux=aux.getSiguiente()
-            aux.setSiguiente(unnodo)
-            self.__ultimo=unnodo
 
-        self.__cant+=1
+        unNodo = nodo(dato)
+
+        if self.__comienzo == None:
+            self.__comienzo = unNodo
+            self.__ultimo = unNodo
+
+        else:
+            aux = self.__comienzo
+            while aux.getSig() != None:
+                  aux = aux.getSig()
+
+            aux.setSiguiente(unNodo)
+            self.__ultimo = unNodo
+        self.__cant+= 1
+
+
     def vacio(self):
-        return self.__comienzo==None
-    
+        return self.__comienzo == None   
+
     def suprimir(self):
-        d=None
-        if self.vacio()!=True:
-            d=self.__comienzo.getDato()
-            self.__comienzo=self.__comienzo.getSiguiente()
-            self.__cant-=1
-        return d
-    
+
+        print("\n Se suprimio el primer elemento ")
+
+        if self.vacio() == True:
+            print("\n COLA VACIA ")
+        else:
+            d = self.__comienzo.getDato()
+            self.__comienzo = self.__comienzo.getSig()
+            self.__cant -= 1
+
+        return d 
+
     def recorrer(self):
-        aux=self.__comienzo
-        while aux!=None:
+
+        aux = self.__comienzo
+
+        while aux != None:
             print(aux.getDato())
-            aux=aux.getSiguiente()
-        print("Se recorrio la cola")
+            aux = aux.getSig()
+
+        print("\n Se recorrio la cola ")
+
+
 

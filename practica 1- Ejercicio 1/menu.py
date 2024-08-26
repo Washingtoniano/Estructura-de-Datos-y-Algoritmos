@@ -95,7 +95,19 @@ class menu():
         else:
             d=dato1<dato2
         return d
-    
+    def mostrarR(self,arreglo):
+        for i in range(len(arreglo)):
+            d=arreglo[i]
+            lis=[]
+            print("\nEl estado de la lista",i+1, "es:")
+            x=d.eliminar()
+            while x!=None:
+                lis.append(x)
+                x=d.eliminar()
+            j=len(lis)-1
+            for i in range(len(lis)):
+                print(lis[i])
+                d.insertar(lis[j-i])
     def opcion4(self,pi):
         import numpy as np
         arreglo=np.empty(3,dtype=Pila)
@@ -112,27 +124,16 @@ class menu():
         print("Bienvenido a las torres de Hanoi.\nLas reglas son simples, debes mover todas las piesas de una torre a otra, solo puedes mover una pieza, las piezas deben ir de mayor a menor\n")
         while pilaFinal.lleno()==False:
             
-            for i in range(len(arreglo)):
-                d=arreglo[i]
-                lis=[]
-                print("\nEl estado de la lista",i+1, "es:")
-                x=d.eliminar()
-                while x!=None:
-                    lis.append(x)
-                    x=d.eliminar()
-                j=len(lis)-1
-                for i in range(len(lis)):
-                    print(lis[i])
-                    d.insertar(lis[j-i])
+            self.mostrarR(arreglo)
 
             print("La torre final esta vacia o incompleta, el juego continua\n")
             if pilaPrincipal.lleno()==True:
                 print("La torre principal esta llena (no aceptara mas discos)")
             elif pilaAuxiliar.lleno()==True:
                 print("La torre auxiliar esta llena (no aceptara mas discos)")
-            op=int(input("Seleccione de donde desea mover la ficha Torre 1(Principal) 2(auxiliar) 3(Final)\n"))
+            op=int(input("\n Seleccione de donde desea mover la ficha Torre 1(Principal) 2(auxiliar) 3(Final)\n"))
             if arreglo[op-1].vacia()==True:
-                print("La torre",op,"esta vacia. Seleccione otra")
+                print("\n La torre",op,"esta vacia. Seleccione otra")
             else:
 
                 pil=arreglo[op-1]

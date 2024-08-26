@@ -1,38 +1,55 @@
 import numpy as np
+
 class ColaSecu():
-    __arreglo:np.ndarray
-    __cant:int
-    __dimension:int
-    __primero:int
-    __ultimo:int
+    __arreglo : np.ndarray
+    __cantidad : int
+    __dimension : int
+    __ultimo : int
+    __primero : int
 
-    def __init__(self,dimension=4) -> None:
-        self.__arreglo=np.empty(dimension,dtype=int)
-        self.__dimension=dimension
-        self.__cant=0
-        self.__primero=0
-        self.__ultimo=dimension-1
-    def lleno(self):
-        return self.__dimension==self.__cant
+    def __init__(self,dimension = 4):
+        self.__arreglo = np.empty(dimension, dtype = int)
+        self.__cantidad = 0
+        self.__ultimo = 0
+        self.__dimension = dimension
+        self.__primero = 0    
+
     def vacio(self):
-        return self.__cant==0
+        return self.__cantidad == 0  
 
-    def agregar(self,dato):
-        if self.lleno()==False:
+    def insertar(self,dato):
 
-            self.__arreglo[self.__cant]=dato
-            self.__cant+=1
+        if (self.__dimension > self.__cantidad):
+            self.__arreglo[self.__ultimo] = dato
+            self.__ultimo = (self.__ultimo + 1) % self.__dimension 
+            self.__cantidad += 1
         else:
-            print("Arreglo lleno")
-    def elimnar(self):
-        d=None
-        if self.vacio()==False:
-            self.__cant-=1
-            x=self.__arreglo[self.__primero]
-            self.__primero+=1
-            d=x
-        return d
-    def recorrer(self):
-        for i in range (len(self.__arreglo)):
-            print(self.__arreglo[i])
+            print("\n COLA LLENA")
+    
+    def suprimir(self):
 
+        x = None
+
+        if self.vacio() == True:
+           print("\n COLA VACIA")
+
+        else:
+            x = self.__arreglo[self.__primero]
+            self.__cantidad =self.__cantidad - 1
+            self.__primero=(self.__primero+1)%self.__dimension
+            return x 
+
+    def recorrer(self):
+
+        if self.vacio() != True:
+            i = self.__primero
+     
+            for j in range(self.__cantidad):
+                print(self.__arreglo[i])
+                i = (i+1) % self.__dimension           
+        
+
+
+
+
+    
