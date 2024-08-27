@@ -33,16 +33,14 @@ class ColaEnca():
 
     def suprimir(self):
 
-        print("\n Se suprimio el primer elemento ")
+        #print("\n Se suprimio el primer elemento ")
 
-        if self.vacio() == True:
-            print("\n COLA VACIA ")
-        else:
+        if self.vacio() != True:
             d = self.__comienzo.getDato()
             self.__comienzo = self.__comienzo.getSig()
             self.__cant -= 1
 
-        return d 
+            return d 
 
     def recorrer(self):
 

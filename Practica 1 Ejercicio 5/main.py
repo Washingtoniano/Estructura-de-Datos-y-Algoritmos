@@ -1,6 +1,6 @@
 from ColaSecuencial import ColaSecu
 from ColaEncadenada import ColaEnca
-import random
+from menu import menu
 #tiempo-> minutos 
 #almacenar tiempos en la cola
 #iterar con el tiempo
@@ -13,19 +13,15 @@ import random
         c.insertar(i)
         x=c.suprimir()
         tiempo=i-x
-"""
 
 
-if __name__ =="__main__":
-    Cola = ColaEnca()
-    """
     import numpy as np
 
     cajas=np.ndarray(3)
     cajas[0]=0
     cajas[1]=0
     cajas[2]=0
-    """
+    
     caj1=0
     caj2=0
     caj3=0
@@ -84,29 +80,26 @@ if __name__ =="__main__":
     print("Trabajos realizados ",cont)
     print("Tiempo promedio ",round(total/cont,2))
     print("Trabajos pendientes",Cola.getCant())
+"""
 
 
 
 
 
-"""""
+if __name__ =="__main__":
     
-    #ColaSecuencial = ColaSecu()
+    Cola = ColaEnca()
+    unmenu=menu()
+    print("Bienvenido\n")
+    op=input("Ingrese la opcion que desea\n 1-Simulacion de impresoras\n 2-Simulacion cajeros\n 0-Salir\n")
+    while op!='0':
+        unmenu.opcion(op,Cola)
+        op=input("Ingrese la opcion que desea\n 1-Simulacion de impresoras\n 2-Simulacion cajeros\n 0-Salir\n")
 
-    numero1 = 10
-    numero2 = 20
-    numero3 = 30
-    numero4 = 40
 
-    pila = ColaEnca()
-    #pila.suprimir()
 
-    pila.insertar(numero1)
-    pila.insertar(numero2)
-    pila.insertar(numero3)
-    pila.insertar(numero4)
 
-    pila.recorrer()
-    pila.suprimir()
-    pila.recorrer()
-"""""
+
+
+
+
