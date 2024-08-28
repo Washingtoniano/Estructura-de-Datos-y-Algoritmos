@@ -81,11 +81,13 @@ class menu():
 
 
     def tiempocola(self,cola):
-        x=cola.suprimir()
-        d=cola.suprimir()
-        while x!=None and d!=None:
-            x=x+d
+        cant=cola.getCant()
+        x=0
+
+        for i in range((cant)):
             d=cola.suprimir()
+            x+=d
+            cola.insertar(d)
         if x==None:
             x=0
         return x
@@ -229,6 +231,18 @@ class menu():
         tOTAC=self.tiempocola(col1)+self.tiempocola(col2)+self.tiempocola(col3)
         if canTO!=0:
             print("Promedio de espera de los clientes sin atender",tOTAC/canTO)
+            print("Tiempo max de espera en:")
+            print("Cola 1:",self.max(col1))
+            print("Cola 2:",self.max(col2))
+            print("Cola 3:",self.max(col3))
+    def max(self,cola):
+        max=0
+        x=cola.suprimir()
+        while x!=None:
+            if x>max:
+                max=x
+            x=cola.suprimir()
+        return max
         
 
 
