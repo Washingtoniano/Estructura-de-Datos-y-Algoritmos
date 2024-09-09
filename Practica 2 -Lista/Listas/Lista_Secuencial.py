@@ -64,9 +64,11 @@ class ListSecu():
             if i<self.__ultimo:
                 for j in range(i,self.__ultimo):
                     self.__arreglo[j]=self.__arreglo[j+1]
-            print("Se elemino el elemento",dato,"de la posicion",i)
-            self.__ultimo-=1
-            self.__cantidad-=1
+                print("Se elemino el elemento",dato,"de la posicion",i)
+                self.__ultimo-=1
+                self.__cantidad-=1
+            else:
+                print("No se encontro el elemento")
 
 
             
@@ -136,7 +138,6 @@ class ListSecu():
         if not self.lleno():
             if self.Vacio():
                 self.__ultimo+=1
-
                 self.__arreglo[self.__ultimo]=dato
                 self.__cantidad+=1
             else:
@@ -155,5 +156,5 @@ class ListSecu():
                     self.__arreglo[i]=dato
                     self.__cantidad+=1
                     self.__ultimo+=1
-#Ctrñ++C
+#Ctrl+k+C
 #Ctrl+K+U

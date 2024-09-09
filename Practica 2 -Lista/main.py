@@ -16,7 +16,7 @@ if __name__ =="__main__":
     Ls.Recorrer()
     print("____")
 
-    Ls.SuprimirPorContenido(5)
+    Ls.SuprimirPorContenido(7)
 
     Ls.Recorrer()
 """    

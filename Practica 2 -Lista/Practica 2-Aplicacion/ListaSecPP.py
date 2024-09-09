@@ -65,4 +65,13 @@ class ListaSec():
         if self.recuperar(i)==x:
             d=self.recuperar(i)
         return d
+    def elimarDUp(self):
+        i=0
+        j=0
+        for i in range ((self.__cant)):
+
+            for j in range((self.__cant)):
+                if j!=i:
+                    if self.__arreglo[j]==self.__arreglo[i]:
+                        self.Suprimir(j)
         

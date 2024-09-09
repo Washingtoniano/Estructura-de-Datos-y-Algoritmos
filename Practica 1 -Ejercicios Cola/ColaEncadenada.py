@@ -1,9 +1,9 @@
 from nodo import nodo
 
 class ColaEnca():
-    __comienzo:None
+    __comienzo:nodo
     __cant:int
-    __ultimo = None
+    __ultimo : nodo
 
     def __init__(self):
         self.__comienzo = None
