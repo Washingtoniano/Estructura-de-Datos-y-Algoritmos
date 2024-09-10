@@ -21,7 +21,7 @@ class menu():
             print("La pila no es valida")
     
     def opcion1(self,pi):
-        if type(pi)==pila:
+        if type(pi)==Pila:
             print("\nPila Secuencial")
         else:
             print("\nPila encadena")

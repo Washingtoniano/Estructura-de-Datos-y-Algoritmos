@@ -39,11 +39,11 @@ class Pila():
         i=0
         longitud = len(self.__arreglo)
 
-        #for i in range(longitud):
-            #print("longitud del arreglo",len(self.__arreglo))
-            #print(f"valor tope {self.__tope}")
-            #print("Posicion {}".format(dato-i))
-            #print(self.__arreglo[dato - i])        
+        for i in range(self.__cant):
+            print("longitud del arreglo",len(self.__arreglo))
+            print(f"valor tope {self.__tope}")
+            print("Posicion {}".format(dato-i))
+            print(self.__arreglo[dato - i])        
 
     def vacia(self):
         return(self.__cant == 0)  
