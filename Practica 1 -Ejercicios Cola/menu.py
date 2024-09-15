@@ -162,19 +162,19 @@ class menu():
                                 #print(tiempodeespera)
                         total+=tiempodeespera
                 else:
-                    max=999
+                    min=999
                     for i in range(3):
-                        if max>col1.getCant():
-                            max=col1.getCant()
-                        elif max>col2.getCant():
-                            max=col2.getCant()
-                        elif max> col3.getCant():
-                            max=col3.getCant()
-                    if (max==col1.getCant()):
+                        if min>col1.getCant():
+                            min=col1.getCant()
+                        elif min>col2.getCant():
+                            min=col2.getCant()
+                        elif min> col3.getCant():
+                            min=col3.getCant()
+                    if (min==col1.getCant()):
                         col1.insertar(i)
-                    elif max==col2.getCant():
+                    elif min==col2.getCant():
                         col2.insertar(i)
-                    elif max==col3.getCant():
+                    elif min==col3.getCant():
                         col3.insertar(i)
                     else:
                         op=random.randint(1,3)

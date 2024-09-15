@@ -12,30 +12,25 @@ class ListEnca():
         return self.__cant==0
     def insertar(self,dato,pos=0):
         unnodo=Nodo(dato)
-        if self.Vacio():
-            self.__comienzo=unnodo
-            self.__ultimo=unnodo
-            self.__cant+=1
-        elif pos==self.__cant:
-            aux=self.__comienzo
-            while aux.getSiguiente()!=None:
-                aux=aux.getSiguiente()
-            aux.setSiguiente(unnodo)
-            self.__ultimo=unnodo
-            self.__cant+=1
-        elif pos==0:
-            unnodo.setSiguiente(self.__comienzo)
-            self.__comienzo=unnodo
-            self.__cant+=1
-        elif pos<self.__cant:
-            aux=self.__comienzo
-            for i in range(pos-1):
-                aux=aux.getSiguiente()
-            unnodo.setSiguiente(aux.getSiguiente())
-            aux.setSiguiente(unnodo)
-            self.__cant+=1
-        else:
-            print("Error No se puede insertar")
+        if pos>=0 and pos<=self.__cant:
+            if pos==0:
+                unnodo.setSiguiente(self.__comienzo)
+                self.__comienzo.setSiguiente(unnodo)
+            else:
+                i=0
+                aux=self.__comienzo
+            
+                anterior=aux
+                while i<pos and aux!=None:
+                    anterior=aux
+                    aux=aux.getSiguiente()
+                    i+=1
+                if aux==None:
+                    self.__ultimo=unnodo
+                unnodo.setSiguiente(aux)
+                anterior.setSiguiente(unnodo)
+
+
     def Recuperar(self,pos):
         if self.Vacio()!=True:
             if pos>=0 and pos<self.__cant:
@@ -144,21 +139,24 @@ class ListEnca():
         if self.Vacio()==True:
             self.__comienzo=unnodo
             self.__ultimo=unnodo
+            
         elif self.__comienzo.getDato()>dato:
             unnodo.setSiguiente(self.__comienzo)
             self.__comienzo=unnodo
+        
         else:
             aux=self.__comienzo
             anterior=aux
-            while aux.getSiguiente()!=None and aux.getDato()<dato:
+            while aux!=None and aux.getDato()<dato:
                 anterior=aux
                 aux=aux.getSiguiente()
-            if self.__ultimo.getDato()<dato: 
-                self.__ultimo=unnodo
-                aux.setSiguiente(unnodo)
-            else:
-                unnodo.setSiguiente(aux)
+            if aux==None:
                 anterior.setSiguiente(unnodo)
+                self.__ultimo=unnodo
+            else:
+                unnodo.setSiguiente(anterior.getSiguiente())
+                anterior.setSiguiente(unnodo)
+
         self.__cant+=1
     def Recorrer(self):
         if not self.Vacio():

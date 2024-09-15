@@ -70,11 +70,15 @@ class ListSecu():
             else:
                 print("No se encontro el elemento")
 
-
-            
-
-
-    
+    def recuperar(self,pos):
+        if self.Vacio()!=True:
+            if pos>=0 and pos<=self.__ultimo:
+                return self.__arreglo[pos]
+            else:
+                print("Posicion invalida")
+        else:
+            print("Arreglo vacio")
+                
     def Buscar(self,dato):
         if not self.Vacio():
             i=0

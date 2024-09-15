@@ -1,4 +1,5 @@
 from Lista_Encadenada import ListEnca
+from Lista_Secuencial import ListSecu
 from menu import menu
 def test():
     Ls=ListEnca()
@@ -20,19 +21,21 @@ def test():
 
     Ls.Recorrer()
     
-    # print("____")
+    print("____")
     # Ls.Suprimir(2)
     # Ls.Recorrer()
     # Ls.Buscar(2)
     # print("____")
-    # Ls.Primero()
-    # Ls.Ultimo()
-    # print("El Anterior de {} es {}".format(1,Ls.Anterior(1)))
-    # print("El Siguiente de {} es {}".format(2,Ls.Siguiente(2)))
+    Ls.Primero()
+    Ls.Ultimo()
+    print("El Anterior de {} es {}".format(1,Ls.Anterior(1)))
+    print("El Siguiente de {} es {}".format(2,Ls.Siguiente(2)))
   
 
 
 if __name__ =="__main__":
+    #test()
+
     unmenu=menu()
     print("Bienvenido")
     op=input("Ingrese la opcion que desea\n 1-Matriz\n 2-Polinomio\n 3-Head\n 0-Salir\n")
