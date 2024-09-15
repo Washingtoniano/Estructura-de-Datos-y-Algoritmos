@@ -27,17 +27,19 @@ class arbol():
     def suprimir(self,arbol,dato):
         if arbol==None:
             print("No hay dato")
-        elif arbol.getDato()==dato: 
-            if arbol.getIzquierda()!=None:
-                arbol.setIzquierda(arbol.getIzquierda())
-            elif arbol.getDerecha()!=None:
-                arbol.setDerecha(arbol.getDerecha())
-            else:
-                arbol=None
-        elif arbol.getDato()>dato:
-            self.suprimir(arbol.getIzquierda(),dato)
-        elif arbol.getDato()<dato:
-            self.suprimir(arbol.getDerecha(),dato)
+        else:
+            d=arbol.getDato()
+            if d>dato:
+                
+                if arbol.getIzquierda() !=None and arbol.getIzquierda().getDato()!=dato:
+                    self.suprimir(arbol.getIzquierda(),dato)
+                else:
+                    arbol.setIzquierda(None)
+            elif d<dato:
+                if arbol.getDerecha()!=None and arbol.getDerecha().getDato()!=dato:
+                    self.suprimir(arbol.getDerecha(),dato)
+                else:
+                    arbol.setDerecha(None)
     def Buscar(self,arbol,dato):
         #Se pueden borrar el primer if y el print
         a=False
