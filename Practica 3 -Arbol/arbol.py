@@ -3,22 +3,77 @@ class arbol():
     __raiz:nodo
     def __init__(self) -> None:
         self.__raiz=None
-
+    def vacio(self):
+        return self.__raiz==None
     def insertar(self,arbol,dato):
         unnodo=nodo(dato)
-        if arbol==None:
-            arbol=unnodo
-        elif arbol.getDato()==unnodo.getDato():
+        if self.vacio()==True:
+            self.__raiz=unnodo
+        elif arbol.getDato()==dato:
             print("Dato ya ingresado")
-        elif arbol.getDato()>unnodo.getDato():
-            self.recur(arbol.getIzquierda(),dato)
-        elif arbol.getDato()<unnodo.getDato():
-            self.recur(arbol.getDerecha(),dato)
+        elif arbol.getDato()>dato:
+            if arbol.getIzquierda()==None:
+                arbol.setIzquierda(unnodo)
+            else:
+                self.insertar(arbol.getIzquierda(),dato)
+        elif arbol.getDato()<dato:
+            if arbol.getDerecha()==None:
+                arbol.setDerecha(unnodo)
+            else:
+                self.insertar(arbol.getDerecha(),dato)
     def getraiz(self):
         return self.__raiz
         
     def suprimir(self,arbol,dato):
         if arbol==None:
             print("No hay dato")
-        if arbol.getDato()>dato:
+        elif arbol.getDato()==dato: 
+            if arbol.getIzquierda()!=None:
+                arbol.setIzquierda(arbol.getIzquierda())
+            elif arbol.getDerecha()!=None:
+                arbol.setDerecha(arbol.getDerecha())
+            else:
+                arbol=None
+        elif arbol.getDato()>dato:
             self.suprimir(arbol.getIzquierda(),dato)
+        elif arbol.getDato()<dato:
+            self.suprimir(arbol.getDerecha(),dato)
+    def Buscar(self,arbol,dato):
+        #Se pueden borrar el primer if y el print
+        a=False
+        if arbol==None:
+            print("Dato inexistente")
+        elif arbol.getDato()==dato:
+            a=True
+        elif arbol.getDato()<dato:
+            a=self.Buscar(arbol.getDerecha(),dato)
+        elif arbol.getDato()>dato:
+            a=self.Buscar(arbol.getIzquierda(),dato)
+        return a
+    def preorden(self,arbol):
+        if arbol!=None:
+            print(arbol.getDato())
+
+            self.preorden(arbol.getIzquierda())
+
+            self.preorden(arbol.getDerecha())
+    def postorden(self,arbol):
+        if arbol!=None:
+
+            self.postorden(arbol.getIzquierda())
+            self.postorden(arbol.getDerecha())
+            print(arbol.getDato())
+
+
+    def inorden(self,arbol):
+        if arbol!=None:
+            self.inorden(arbol.getIzquierda())
+
+            print(arbol.getDato())
+            self.inorden(arbol.getDerecha())
+
+
+
+
+
+            
