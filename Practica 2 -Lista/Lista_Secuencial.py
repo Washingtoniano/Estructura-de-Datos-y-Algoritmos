@@ -28,7 +28,6 @@ class ListSecu():
                 self.__cantidad+=1
                 self.__ultimo+=1
                 print("El elmento",dato,"fue insertado en la poscion",i)
-                
             else:
                 print("Posicion no valida")
         else:

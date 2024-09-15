@@ -156,8 +156,8 @@ class ListEnca():
             else:
                 unnodo.setSiguiente(anterior.getSiguiente())
                 anterior.setSiguiente(unnodo)
-
         self.__cant+=1
+
     def Recorrer(self):
         if not self.Vacio():
             aux=self.__comienzo

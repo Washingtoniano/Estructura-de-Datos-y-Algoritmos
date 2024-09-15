@@ -1,2 +1,2 @@
-d=arbol.getraiz()
-arbol.insertar(x,dato)
+if __name__ =="__main__":
+    pass

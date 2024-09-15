@@ -18,4 +18,7 @@ class arbol():
         return self.__raiz
         
     def suprimir(self,arbol,dato):
-        pass
+        if arbol==None:
+            print("No hay dato")
+        if arbol.getDato()>dato:
+            self.suprimir(arbol.getIzquierda(),dato)
