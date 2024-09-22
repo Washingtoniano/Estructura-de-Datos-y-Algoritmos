@@ -25,8 +25,11 @@ def test():
     print("_____")
     print("Inorden")
     ar.inorden(x)
-    print("Raiz",ar.getraiz())
+    print("Raiz",ar.getraiz().getDato())
     print("la altura del arbol es de ",ar.altura(x))
+    print("Buscar nodo 3",ar.Buscar(x,3))
+    if ar.Buscar(x,9)==True:
+        print("Se encontro el dato")
 
 
 if __name__ =="__main__":

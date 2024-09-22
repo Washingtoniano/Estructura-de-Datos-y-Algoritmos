@@ -25,60 +25,72 @@ class arbol():
         return self.__raiz
         
     def suprimir(self,arbol,dato):
-        if arbol==None:
-            print("No hay dato")
+        if self.vacio()==False:
+            if arbol==None:
+                print("No hay dato")
+            else:
+                d=arbol.getDato()
+                if d>dato:
+                    
+                    if arbol.getIzquierda() !=None and arbol.getIzquierda().getDato()!=dato:
+                        self.suprimir(arbol.getIzquierda(),dato)
+                    elif arbol.getIzquierda().getDato()==dato:
+                        Eli=arbol.getIzquierda()
+                        if Eli.getIzquierda()!=None:
+                            new=Eli.getIzquierda()
+                            new.setDerecha(Eli.getDerecha())
+                            arbol.setIzquierda(new)
+                        else:
+                            arbol.setIzquierda(None)
+                elif d<dato:
+                    if arbol.getDerecha()!=None and arbol.getDerecha().getDato()!=dato:
+                        self.suprimir(arbol.getDerecha(),dato)
+                    elif arbol.getDerecha().getDato()==dato:
+                        eli=arbol.getDerecha()
+                        if eli.getDerecha()!=None:
+                            new=eli.getDerecha()
+                            new.setIzquierda(eli.getIzquierda())
+                            arbol.setDerecha(new)
+                        else:
+                            arbol.setDerecha(None)
         else:
-            d=arbol.getDato()
-            if d>dato:
-                
-                if arbol.getIzquierda() !=None and arbol.getIzquierda().getDato()!=dato:
-                    self.suprimir(arbol.getIzquierda(),dato)
-                elif arbol.getIzquierda().getDato()==dato:
-                    Eli=arbol.getIzquierda()
-                    if Eli.getIzquierda()!=None:
-                        new=Eli.getIzquierda()
-                        new.setDerecha(Eli.getDerecha())
-                        arbol.setIzquierda(new)
-                    else:
-                        arbol.setIzquierda(None)
-            elif d<dato:
-                if arbol.getDerecha()!=None and arbol.getDerecha().getDato()!=dato:
-                    self.suprimir(arbol.getDerecha(),dato)
-                elif arbol.getDerecha().getDato()==dato:
-                    eli=arbol.getDerecha()
-                    if eli.getDerecha()!=None:
-                        new=eli.getDerecha()
-                        new.setIzquierda(eli.getIzquierda())
-                        arbol.setDerecha(new)
-                    else:
-                        arbol.setDerecha(None)
+            print("Arbol vacio")
     def Buscar(self,arbol,dato):
+        if self.vacio()==False:
         #Se pueden borrar el primer if y el print
-        a=False
-        if arbol==None:
-            print("Dato inexistente")
-        elif arbol.getDato()==dato:
-            a=True
-        elif arbol.getDato()<dato:
-            a=self.Buscar(arbol.getDerecha(),dato)
-        elif arbol.getDato()>dato:
-            a=self.Buscar(arbol.getIzquierda(),dato)
-        return a
+            a=False
+            if arbol==None:
+                print("Dato inexistente")
+            elif arbol.getDato()==dato:
+                a=True
+            elif arbol.getDato()<dato:
+                a=self.Buscar(arbol.getDerecha(),dato)
+            elif arbol.getDato()>dato:
+                a=self.Buscar(arbol.getIzquierda(),dato)
+            return a
+        else:
+            print("Arbol vacio")
     def preorden(self,arbol):
-        if arbol!=None:
-            print(arbol.getDato())
+        if self.vacio()==False:
+            if arbol!=None:
+                print(arbol.getDato())
 
-            self.preorden(arbol.getIzquierda())
+                self.preorden(arbol.getIzquierda())
 
-            self.preorden(arbol.getDerecha())
+                self.preorden(arbol.getDerecha())
+        else:
+            print("Arbol vacio")
     def postorden(self,arbol):
         #Iquierda derecha raiz
+        if self.vacio()==False:
 
-        if arbol!=None:
+            if arbol!=None:
 
-            self.postorden(arbol.getIzquierda())
-            self.postorden(arbol.getDerecha())
-            print(arbol.getDato())
+                self.postorden(arbol.getIzquierda())
+                self.postorden(arbol.getDerecha())
+                print(arbol.getDato())
+        else:
+            print("Arbol vacio")
     # def altura(self,arbol,de=0,iz=0):
     #     if arbol !=None:
     #         if arbol.getDerecha()!=None:
@@ -94,60 +106,78 @@ class arbol():
             
             
     def altura(self,arbol,d=0,x=0):
-        if arbol!=None:
-            if arbol.getDerecha()!=None:
-                d=d+1
-                d=self.altura(arbol.getDerecha(),d,x)
-            if arbol.getIzquierda()!=None:
-                x=self.altura(arbol.getIzquierda(),d,x=x+1)
-            if d>x:
-                x=d
-        return x
+        if self.vacio()==False:
+            if arbol!=None:
+                if arbol.getDerecha()!=None:
+                    d=d+1
+                    d=self.altura(arbol.getDerecha(),d,x)
+                if arbol.getIzquierda()!=None:
+                    x=self.altura(arbol.getIzquierda(),d,x=x+1)
+                if d>x:
+                    x=d
+            return x
+        else:
+            print("Arbol vacio")
 
 
     def inorden(self,arbol):
-        if arbol!=None:
-            self.inorden(arbol.getIzquierda())
+        if self.vacio()==False:
+            if arbol!=None:
+                self.inorden(arbol.getIzquierda())
 
-            print(arbol.getDato())
-            self.inorden(arbol.getDerecha())
+                print(arbol.getDato())
+                self.inorden(arbol.getDerecha())
+        else:
+            print("Arbol vacio")
     def hoja(self,arbol,dato):
-        if arbol==None:
-            print("Error")
-        elif arbol.getDato()==dato:
-            if arbol.getDerecha()==None and arbol.getIzquierda()==None:
-                print("Es una hoja")
-            else:
-                print("No es una hoja")
-        elif arbol.getDato()>dato:
-            self.hoja(arbol.getIzquierda(),dato)
-        elif arbol.getDato()<dato:
-            self.hoja(arbol.getDerecha(),dato)
+        if self.vacio()==False:
+            if arbol==None:
+                print("Error")
+            elif arbol.getDato()==dato:
+                if arbol.getDerecha()==None and arbol.getIzquierda()==None:
+                    print("Es una hoja")
+                else:
+                    print("No es una hoja")
+            elif arbol.getDato()>dato:
+                self.hoja(arbol.getIzquierda(),dato)
+            elif arbol.getDato()<dato:
+                self.hoja(arbol.getDerecha(),dato)
+        else:
+            print("Arbol vacio")
     def nivel(self,arbol,dato,x=0):
-        if arbol==None:
-            print("Error")
-        elif arbol.getDato()==dato:
-            print("El nodo",dato,"se encuentra en el nivel",x)
-        elif arbol.getDato()<dato:
-            x+=1
-            self.nivel(arbol.getDerecha(),dato,x)
-        elif arbol.getDato()>dato:
-            x+=1
-            self.nivel(arbol.getIzquierda(),dato,x)
+        if self.vacio()==False:
+            if arbol==None:
+                print("Error")
+            elif arbol.getDato()==dato:
+                print("El nodo",dato,"se encuentra en el nivel",x)
+            elif arbol.getDato()<dato:
+                x+=1
+                self.nivel(arbol.getDerecha(),dato,x)
+            elif arbol.getDato()>dato:
+                x+=1
+                self.nivel(arbol.getIzquierda(),dato,x)
+        else:
+            print("Arbol vacio")
 
 
     def Hijo(self,arbol,p,H):
-        Band=self.Operacion(arbol,p,H)
-        if Band==True:
-            print("El nodo",H,"es hijo directo del nodo",p)
+        if self.vacio()==False:
+            Band=self.Operacion(arbol,p,H)
+            if Band==True:
+                print("El nodo",H,"es hijo directo del nodo",p)
+            else:
+                print("El nodo",H,"no es hijo directo del nodo",p)
         else:
-            print("El nodo",H,"no es hijo directo del nodo",p)
+            print("Arbol vacio")
     def Padre(self,arbol,p,H):
-        Band=self.Operacion(arbol,p,H)
-        if Band==True:
-            print("El nodo",p,"es padre directo del nodo",H)
+        if self.vacio()==False:
+            Band=self.Operacion(arbol,p,H)
+            if Band==True:
+                print("El nodo",p,"es padre directo del nodo",H)
+            else:
+                print("El nodo",p,"no es padre directo del nodo",H)
         else:
-            print("El nodo",p,"no es padre directo del nodo",H)
+            print("Arbol vacio")
 
     def Operacion(self,arbol,P,H):
         band=False
