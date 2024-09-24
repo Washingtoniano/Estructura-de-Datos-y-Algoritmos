@@ -27,8 +27,12 @@ class menu():
         ar.insertar(ar.getraiz(),2)
         ar.insertar(ar.getraiz(),6)
         ar.insertar(ar.getraiz(),0)
+        ar.insertar(ar.getraiz(),8)
+        ar.insertar(ar.getraiz(),7)
+        ar.insertar(ar.getraiz(),9)
 
-        print("Datos insertados: 5314260")
+
+        print("Datos insertados: 5314260879")
 
         print("______")
         ar.Hijo(x,5,6)

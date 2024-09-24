@@ -24,7 +24,22 @@ class arbol():
                 self.insertar(arbol.getDerecha(),dato)
     def getraiz(self):
         return self.__raiz
-        
+    def insercion_eli(self,Eli,arbol):
+        new=None
+        if Eli!=None:
+            if Eli.getGrado()==2:
+                new=self.menor(Eli.getIzquierda(),arbol.getDato()-1)
+                new.setDerecha(Eli.getDerecha())
+                if Eli.getIzquierda().getDato()!=new.getDato():
+                    new.setIzquierda(Eli.getIzquierda())
+            elif Eli.getGrado()==1:
+                    if Eli.getDerecha()!=None:
+                        new=Eli.getDerecha()
+
+                    else:
+                        new=Eli.getIzquierda()
+        return new
+
     def suprimir(self,arbol,dato):
         #Comprobar myor de menores, se puede reutilizar el codigo menor para los demas casos, buscando hojas y convirtiendolas en reemplazos del nodo a eliminar 
         if self.vacio()==False:
@@ -33,32 +48,20 @@ class arbol():
             else:
                 d=arbol.getDato()
                 if d>dato:
-                    
                     if arbol.getIzquierda() !=None and arbol.getIzquierda().getDato()!=dato:
                         self.suprimir(arbol.getIzquierda(),dato)
                     elif arbol.getIzquierda().getDato()==dato:
                         Eli=arbol.getIzquierda()
-                        if Eli.getGrado()==2:
-                            new=Eli.getIzquierda()
-                            new.setDerecha(Eli.getDerecha())
-                            arbol.setIzquierda(new)
-                        elif arbol.getIzquierda()==1:
-                            arbol.setIzquierda(Eli.getIzquierda())
-                        else:
-                            arbol.setIzquierda(None)
+                        new=self.insercion_eli(Eli,arbol)
+                        arbol.setIzquierda(new)        
                 elif d<dato:
                     if arbol.getDerecha()!=None and arbol.getDerecha().getDato()!=dato:
                         self.suprimir(arbol.getDerecha(),dato)
                     elif arbol.getDerecha().getDato()==dato:
-                        Eli=arbol.getIzquierda()
-                        if Eli.getGrado()==2:
-                            new=Eli.getIzquierda()
-                            new.setDerecha(Eli.getDerecha())
-                            arbol.setDerecha(new)
-                        elif Eli.getGrado()==1:
-                            arbol.setDerecha(Eli.GetDerecha())
-                        else:
-                            arbol.setDerecha(None)
+                        Eli=arbol.getDerecha()
+                        new=self.insercion_eli(Eli,arbol)
+
+                        arbol.setDerecha(new)
                 elif d==dato:
                     if arbol.getGrado()==2:
                         maxi=0
@@ -73,12 +76,15 @@ class arbol():
             print("Arbol vacio")
 
     def menor(self,ar,maxi):
+        aux=None
+
         while ar.getDerecha()!=None:
             aux=ar
             ar=ar.getDerecha()
 
         maxi=ar
-        aux.setDerecha(None)
+        if aux!=None:
+            aux.setDerecha(None)
         return maxi
 
 
