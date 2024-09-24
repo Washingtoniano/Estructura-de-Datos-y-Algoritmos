@@ -1,3 +1,4 @@
+from tkinter import N
 from nodo import nodo
 class arbol():
     __raiz:nodo
@@ -25,6 +26,7 @@ class arbol():
         return self.__raiz
         
     def suprimir(self,arbol,dato):
+        #Comprobar myor de menores, se puede reutilizar el codigo menor para los demas casos, buscando hojas y convirtiendolas en reemplazos del nodo a eliminar 
         if self.vacio()==False:
             if arbol==None:
                 print("No hay dato")
@@ -36,25 +38,51 @@ class arbol():
                         self.suprimir(arbol.getIzquierda(),dato)
                     elif arbol.getIzquierda().getDato()==dato:
                         Eli=arbol.getIzquierda()
-                        if Eli.getIzquierda()!=None:
+                        if Eli.getGrado()==2:
                             new=Eli.getIzquierda()
                             new.setDerecha(Eli.getDerecha())
                             arbol.setIzquierda(new)
+                        elif arbol.getIzquierda()==1:
+                            arbol.setIzquierda(Eli.getIzquierda())
                         else:
                             arbol.setIzquierda(None)
                 elif d<dato:
                     if arbol.getDerecha()!=None and arbol.getDerecha().getDato()!=dato:
                         self.suprimir(arbol.getDerecha(),dato)
                     elif arbol.getDerecha().getDato()==dato:
-                        eli=arbol.getDerecha()
-                        if eli.getDerecha()!=None:
-                            new=eli.getDerecha()
-                            new.setIzquierda(eli.getIzquierda())
+                        Eli=arbol.getIzquierda()
+                        if Eli.getGrado()==2:
+                            new=Eli.getIzquierda()
+                            new.setDerecha(Eli.getDerecha())
                             arbol.setDerecha(new)
+                        elif Eli.getGrado()==1:
+                            arbol.setDerecha(Eli.GetDerecha())
                         else:
                             arbol.setDerecha(None)
+                elif d==dato:
+                    if arbol.getGrado()==2:
+                        maxi=0
+                        new=self.menor(arbol.getIzquierda(),maxi)
+                        if new.getGrado()==0:
+                            new.setIzquierda(self.__raiz.getIzquierda())
+                            new.setDerecha(self.__raiz.getDerecha())
+                            self.__raiz=new
+                    else:
+                        print("Error")
         else:
             print("Arbol vacio")
+
+    def menor(self,ar,maxi):
+        while ar.getDerecha()!=None:
+            aux=ar
+            ar=ar.getDerecha()
+
+        maxi=ar
+        aux.setDerecha(None)
+        return maxi
+
+
+
     def Buscar(self,arbol,dato):
         if self.vacio()==False:
         #Se pueden borrar el primer if y el print

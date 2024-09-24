@@ -1,3 +1,6 @@
+from tkinter import N
+
+
 class nodo():
     __dato:int
     __izquierda:object
@@ -22,3 +25,10 @@ class nodo():
     
     def getDerecha(self):
         return self.__derecha
+    def getGrado(self):
+        grado=0
+        if self.__derecha!=None:
+            grado+=1
+        if self.__izquierda!=None:
+            grado+=1
+        return grado

@@ -1,36 +1,12 @@
 from arbol import arbol
-def test():
-    ar=arbol()
-    x=ar.getraiz()
-    ar.insertar(x,5)
-    x=ar.getraiz()
-    ar.insertar(x,3)
-    ar.insertar(x,1)
-    ar.insertar(x,4)
-    ar.insertar(x,2)
-    ar.insertar(x,6)
-    print("______")
-    ar.Hijo(x,5,6)
-    ar.Padre(x,5,6)
-    ar.camino(x,6,1)
-    print("_____")
-    ar.insertar(x,0)
-    ar.suprimir(x,4)
-    print("______")
-    print("Preorden")
-    ar.preorden(x)
-    print("_______")
-    print("Postorden")
-    ar.postorden(x)
-    print("_____")
-    print("Inorden")
-    ar.inorden(x)
-    print("Raiz",ar.getraiz().getDato())
-    print("la altura del arbol es de ",ar.altura(x))
-    print("Buscar nodo 3",ar.Buscar(x,3))
-    if ar.Buscar(x,9)==True:
-        print("Se encontro el dato")
-
+from menu import menu
 
 if __name__ =="__main__":
-    test()
+    unmenu=menu()
+    ar=arbol()
+    print("Bienvenido")
+    op=input("Ingrese la opcion que desea\n 1-Test\n 2-\n 3-\n 0-Salir\n")
+    while op != '0':
+        unmenu.opcion(op,ar)
+        op=input("Ingrese la opcion que desea\n 1-Test\n 2-\n 3-\n 0-Salir\n")
+
