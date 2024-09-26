@@ -18,9 +18,7 @@ class menu():
         else:
             print("No hay arbol")
     def opcion1(self,ar):
-        x=ar.getraiz()
         ar.insertar(ar.getraiz(),5)
-        x=ar.getraiz()
         ar.insertar(ar.getraiz(),3)
         ar.insertar(ar.getraiz(),1)
         ar.insertar(ar.getraiz(),4)
@@ -30,7 +28,13 @@ class menu():
         ar.insertar(ar.getraiz(),8)
         ar.insertar(ar.getraiz(),7)
         ar.insertar(ar.getraiz(),9)
+        
+        self.test(ar)
 
+
+    
+    def test(self,ar):
+        x=ar.getraiz()
 
         print("Datos insertados: 5314260879")
 
@@ -39,8 +43,14 @@ class menu():
         ar.Padre(x,5,6)
         ar.camino(x,6,1)
         print("_____")
-        ar.suprimir(x,3)
-        print("Dato borrado :3")
+        try:
+            borrar=int(input("Ingrese el dato a borrar "))
+        except ValueError:
+            print("Se esperaba un numero")
+        if ar.Buscar(x,borrar):
+            ar.suprimir(x,borrar)
+            print("Dato borrado:",borrar)
+
         print("______")
         print("Preorden")
         ar.preorden(ar.getraiz())
@@ -54,9 +64,22 @@ class menu():
         print("la altura del arbol es de ",ar.altura(x))
         print("Buscar nodo 3",ar.Buscar(x,3))
         if ar.Buscar(ar.getraiz(),9)==True:
-            print("Se encontro el dato")
+            print("Se encontro el dato")        
 
     def opcion2(self,ar):
-        pass
+        ar.insertarIterativo(5)
+        ar.insertarIterativo(3)
+        ar.insertarIterativo(1)
+        ar.insertarIterativo(4)
+        ar.insertarIterativo(2)
+        ar.insertarIterativo(6)
+        ar.insertarIterativo(0)
+        ar.insertarIterativo(8)
+        ar.insertarIterativo(7)
+        ar.insertarIterativo(9)
+        self.test(ar)
+
+
+
     def opcion3(self,ar):
         pass

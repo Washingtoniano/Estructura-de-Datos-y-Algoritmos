@@ -244,7 +244,6 @@ class arbol():
 
 
     def camino(self,arbol,A,B):
-
         if self.vacio()==False:
             if arbol!=None:
                 if arbol.getDato()==A:
@@ -268,7 +267,42 @@ class arbol():
         else:
             print("Arbol Vacio")
 
-        
+    def insertarIterativo(self,dato):
+        band=False
+
+        unnodo=nodo(dato)
+        if self.vacio()==True:
+            self.__raiz=unnodo
+        else:
+            aux=self.getraiz()
+            BD=False
+            BI=False
+            while aux!=None and band==False:
+                ant=aux
+                D=aux.getDato()
+                if D==dato:
+                    band==True
+                else:
+                    if D>dato:
+                        aux=aux.getIzquierda()
+                        BD=False
+                        BI=True
+                    elif D<dato:
+                        aux=aux.getDerecha()
+                        BD=True
+                        BI=False
+                    if aux==None:
+                        if BD==True:
+                            ant.setDerecha(unnodo)
+                        elif BI ==True:
+                            ant.setIzquierda(unnodo)
+        if band==True:
+            print("Dato ya ingresado")
+        else:
+            print("Dato cargado")
+
+
+                
 
 
 
