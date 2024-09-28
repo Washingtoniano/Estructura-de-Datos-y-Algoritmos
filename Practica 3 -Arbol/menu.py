@@ -71,8 +71,7 @@ class menu():
             print("Se encontro el dato")   
         ar.reset()   
 
-    def opcion2(self,arb):
-        ar=arbol()
+    def opcion2(self,ar):
         ar.insertarIterativo(5)
         ar.insertarIterativo(3)
         ar.insertarIterativo(1)
@@ -103,43 +102,40 @@ class menu():
         op=input("Que desea hacer")
     def generacion(self,ar,ora):
         lis=Lista_enca()
-        d=0
-        j=0
-        lon=len(ora)
-        for d in range(lon):
-            uncaracter=caracter()
-            uncaracter.setCaracter(ora[d])
+        long=len(ora)
+        for j in range(long):
+            uncaracter=caracter(ora[j])
             cont=0
-            for j in range(lon):
-                if ora[d]==ora[j]:
+            for i in range (long):
+                if ora[i]==ora[j]:
                     cont+=1
             uncaracter.setFrecuencia(cont)
-            lis.insertar(uncaracter)
-        while lis.Uno()!=True:
+            are=arbol()
+            are.insertar(are.getraiz(),uncaracter)
+            lis.insertar(are)
+        while lis.Uno()==False:
             primero=lis.Suprimir(lis.Primero())
             segundo=lis.Suprimir(lis.Primero())
-            total=primero+segundo
-            uncaracter=caracter()
-            uncaracter.setFrecuencia(primero.getFrecuencia()+segundo.getFrecuencia())
-            if ar.vacio()==True:
-                uncaracter.setCaracter(total)
+            x=ar.getraiz()
+            if x==None:
+                total=primero.getDato().getraiz().getDato().getCaracter()+segundo.getDato().getraiz().getDato().getCaracter()
+                fre=primero.getDato().getraiz().getDato().getFrecuencia()+segundo.getDato().getraiz().getDato().getFrecuencia()
 
-                ar.setRaiz(uncaracter)
             else:
-                a=ar.getraiz().getDato()
-                total+=a.getCaracter()
-                uncaracter.setCaracter(total)
+                total+=primero.getDato().getraiz().getDato().getCaracter()+segundo.getDato().getraiz().getDato().getCaracter()
+                fre=primero.getDato().getraiz().getDato().getFrecuencia()+segundo.getDato().getraiz().getDato().getFrecuencia()+x.getDato().getFrecuencia()
 
-                ar.setRaiz(uncaracter)
-            ar.insertar(ar.getraiz(),segundo)
-            ar.insertar(ar.getraiz(),primero)
-            if lis.Uno()==False:
-                lis.insertar(ar.getraiz().getDato())
-        if lis.Uno()==True:
-            ar.setRaiz(lis.Suprimir(lis.Primero()))
-        for i in range(lon):
-            ar.Codigos(ar.getraiz(),ora[i])
+            nuevo=caracter(total)
+
+            nuevo.setFrecuencia(fre)
+            print(primero.getDato().getraiz().getDato())
        
+            ar.setRaiz(nuevo)
+            ar.insertar(ar.getraiz(),segundo.getDato().getraiz().getDato())
+            ar.insertar(ar.getraiz(),primero.getDato().getraiz().getDato())
+            lis.insertar(ar)
+        prm=lis.Suprimir(lis.Primero())
+        ar.setRaiz(prm.getDato().getraiz().getDato())
 
 
             

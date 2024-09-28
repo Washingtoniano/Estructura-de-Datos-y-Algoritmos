@@ -1,4 +1,3 @@
-from tkinter.messagebox import NO
 from nodo import nodo
 class arbol():
     __raiz:nodo

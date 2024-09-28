@@ -6,8 +6,8 @@ class caracter():
     __codigo:list
     __siguiente:object
 
-    def __init__(self):
-        self.__carac=None
+    def __init__(self,ca):
+        self.__carac=ca
         self.__frecuencia=0
         self.__codigo=[]
         self.__siguiente=None
@@ -19,11 +19,6 @@ class caracter():
         return (self.__carac)
     def getSiguiente(self):
         return self.__siguiente
-    def setCaracter(self,ca):
-        if self.__carac==None:
-            self.__carac=ca
-        else:
-            self.__carac+=ca
     def setFrecuencia(self,d):
         self.__frecuencia=d
     def setCodigo(self,bi):
@@ -67,6 +62,6 @@ class caracter():
                 d=self.__codigo[i]
             else:
                 d+=self.__codigo[i]
-
-
         return("Caracter:{} Frecuencia {} Codigo {}".format(self.getCaracter(),self.getFrecuencia(),d))
+    def __eq__(self, other) -> bool:
+        return self.getCaracter()==other.getCaracter() and self.getFrecuencia()==other.getFrecuencia()

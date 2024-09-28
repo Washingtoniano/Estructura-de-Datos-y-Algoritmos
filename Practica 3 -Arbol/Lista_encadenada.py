@@ -1,8 +1,9 @@
 from caracter import caracter
+from NodoArbol import nodo
 #Lista der arboles
 class Lista_enca():
-    __primero:object
-    __ultimo:object
+    __primero:nodo
+    __ultimo:nodo
     __cant:int
     
     def __init__(self):
@@ -11,26 +12,27 @@ class Lista_enca():
         self.__cant=0
     def Vacio(self):
         return self.__cant==0
-    def insertar(self,nodo):
+    def insertar(self,arbol):
+        unnodo=nodo(arbol)
         if self.Vacio()==True:
-            self.__primero=nodo
-            self.__ultimo=nodo
+            self.__primero=unnodo
+            self.__ultimo=unnodo
         else:
-            if self.__primero.getFrecuencia()>nodo.getFrecuencia():
-                nodo.setSiguiente(self.__primero)
-                self.__primero=nodo
+            if self.__primero.getDato().getraiz().getDato().getFrecuencia()>unnodo.getDato().getraiz().getDato().getFrecuencia():
+                unnodo.setSiguiente(self.__primero)
+                self.__primero=unnodo
             else:
                 aux=self.__primero
                 ant=aux
-                while aux!=None and aux.getFrecuencia()<=nodo.getFrecuencia():
+                while aux!=None and aux.getDato().getraiz().getDato().getFrecuencia()<=unnodo.getDato().getraiz().getDato().getFrecuencia():
                     ant=aux
                     aux=aux.getSiguiente()
                 if aux==None:
-                    ant.setSiguiente(nodo)
-                    self.__ultimo=nodo
+                    ant.setSiguiente(unnodo)
+                    self.__ultimo=unnodo
                 else:
-                    nodo.setSiguiente(ant.getSiguiente())
-                    ant.setSiguiente(nodo)
+                    unnodo.setSiguiente(ant.getSiguiente())
+                    ant.setSiguiente(unnodo)
 
         self.__cant+=1
     def Uno(self):
