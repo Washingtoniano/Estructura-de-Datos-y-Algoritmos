@@ -1,8 +1,5 @@
-from tkinter import N
-
-
 class nodo():
-    __dato:int
+    __dato:object
     __izquierda:object
     __derecha:object
 

@@ -1,8 +1,10 @@
-from tkinter import N
+from tkinter.messagebox import NO
 from nodo import nodo
 class arbol():
     __raiz:nodo
     def __init__(self) -> None:
+        self.__raiz=None
+    def reset(self):
         self.__raiz=None
     def vacio(self):
         return self.__raiz==None
@@ -24,11 +26,11 @@ class arbol():
                 self.insertar(arbol.getDerecha(),dato)
     def getraiz(self):
         return self.__raiz
-    def insercion_eli(self,Eli,arbol):
+    def insercion_eli(self,Eli): #Obtener el nuevo nodo que reempazara al eliminado
         new=None
         if Eli!=None:
             if Eli.getGrado()==2:
-                new=self.menor(Eli.getIzquierda(),arbol.getDato()-1)
+                new=self.mayor(Eli.getIzquierda())
                 new.setDerecha(Eli.getDerecha())
                 if Eli.getIzquierda().getDato()!=new.getDato():
                     new.setIzquierda(Eli.getIzquierda())
@@ -52,30 +54,27 @@ class arbol():
                         self.suprimir(arbol.getIzquierda(),dato)
                     elif arbol.getIzquierda().getDato()==dato:
                         Eli=arbol.getIzquierda()
-                        new=self.insercion_eli(Eli,arbol)
+                        new=self.insercion_eli(Eli)
                         arbol.setIzquierda(new)        
                 elif d<dato:
                     if arbol.getDerecha()!=None and arbol.getDerecha().getDato()!=dato:
                         self.suprimir(arbol.getDerecha(),dato)
                     elif arbol.getDerecha().getDato()==dato:
                         Eli=arbol.getDerecha()
-                        new=self.insercion_eli(Eli,arbol)
+                        new=self.insercion_eli(Eli)
 
                         arbol.setDerecha(new)
                 elif d==dato:
-                    if arbol.getGrado()==2:
-                        maxi=0
-                        new=self.menor(arbol.getIzquierda(),maxi)
-                        if new.getGrado()==0:
-                            new.setIzquierda(self.__raiz.getIzquierda())
-                            new.setDerecha(self.__raiz.getDerecha())
-                            self.__raiz=new
-                    else:
-                        print("Error")
+                        
+                    Eli=self.__raiz
+
+                    new=self.insercion_eli(Eli)
+                    self.__raiz=new
+
         else:
             print("Arbol vacio")
 
-    def menor(self,ar,maxi):
+    def mayor(self,ar):
         aux=None
 
         while ar.getDerecha()!=None:
@@ -302,7 +301,31 @@ class arbol():
             print("Dato cargado")
 
 
-                
+   
+    def setRaiz(self,dato):
+        unnodo=nodo(dato)
+
+        if self.vacio()==True:
+            self.__raiz=unnodo
+        else:
+            if unnodo.getDato()<self.__raiz:
+                unnodo.setDerecha(self.__raiz)
+                self.__raiz=unnodo
+            elif unnodo.getDato()>self.__raiz:
+                unnodo.setIzquierda(self.__raiz)
+                self.__raiza=unnodo
+    def Codigos(self,arbol,c):
+        if self.vacio()!=True:
+            if arbol!=None:
+                if arbol.getDato()!=c:
+                    if arbol.getDato()<c:
+                        arbol.getDato().setCodigo(1)
+                        self.Codigos(arbol.getDerecha(),c)
+                    elif arbol.getDato()>c:
+                        arbol.getDato().setCodigo(0)
+                        self.Codigos(arbol.getDerecha(),c)
+
+
 
 
 

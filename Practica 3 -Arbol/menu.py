@@ -1,3 +1,5 @@
+from caracter import caracter
+from Lista_encadenada import Lista_enca
 from arbol import arbol
 class menu():
     __switcher:None
@@ -18,6 +20,7 @@ class menu():
         else:
             print("No hay arbol")
     def opcion1(self,ar):
+        ar=arbol()
         ar.insertar(ar.getraiz(),5)
         ar.insertar(ar.getraiz(),3)
         ar.insertar(ar.getraiz(),1)
@@ -43,6 +46,7 @@ class menu():
         ar.Padre(x,5,6)
         ar.camino(x,6,1)
         print("_____")
+        borrar=0
         try:
             borrar=int(input("Ingrese el dato a borrar "))
         except ValueError:
@@ -64,9 +68,11 @@ class menu():
         print("la altura del arbol es de ",ar.altura(x))
         print("Buscar nodo 3",ar.Buscar(x,3))
         if ar.Buscar(ar.getraiz(),9)==True:
-            print("Se encontro el dato")        
+            print("Se encontro el dato")   
+        ar.reset()   
 
-    def opcion2(self,ar):
+    def opcion2(self,arb):
+        ar=arbol()
         ar.insertarIterativo(5)
         ar.insertarIterativo(3)
         ar.insertarIterativo(1)
@@ -82,4 +88,58 @@ class menu():
 
 
     def opcion3(self,ar):
-        pass
+        #Usar lista ordenada, modificar el nodo con caracter y lista de arboles
+        ora=input("Ingrese una oracion ")
+        self.generacion(ar,ora)
+        print("Arbol generado")
+        print(" MUESTRA EN INORDEN ")
+        ar.inorden(ar.getraiz())
+        print("\n --------------------")
+        print("\n MUESTRA EN POSTORDEN ")
+        ar.postorden(ar.getraiz())
+        print(" --------------------")
+        print("\n MUESTRA EN PREORDEN ")
+        ar.preorden(ar.getraiz())
+        op=input("Que desea hacer")
+    def generacion(self,ar,ora):
+        lis=Lista_enca()
+        d=0
+        j=0
+        lon=len(ora)
+        for d in range(lon):
+            uncaracter=caracter()
+            uncaracter.setCaracter(ora[d])
+            cont=0
+            for j in range(lon):
+                if ora[d]==ora[j]:
+                    cont+=1
+            uncaracter.setFrecuencia(cont)
+            lis.insertar(uncaracter)
+        while lis.Uno()!=True:
+            primero=lis.Suprimir(lis.Primero())
+            segundo=lis.Suprimir(lis.Primero())
+            total=primero+segundo
+            uncaracter=caracter()
+            uncaracter.setFrecuencia(primero.getFrecuencia()+segundo.getFrecuencia())
+            if ar.vacio()==True:
+                uncaracter.setCaracter(total)
+
+                ar.setRaiz(uncaracter)
+            else:
+                a=ar.getraiz().getDato()
+                total+=a.getCaracter()
+                uncaracter.setCaracter(total)
+
+                ar.setRaiz(uncaracter)
+            ar.insertar(ar.getraiz(),segundo)
+            ar.insertar(ar.getraiz(),primero)
+            if lis.Uno()==False:
+                lis.insertar(ar.getraiz().getDato())
+        if lis.Uno()==True:
+            ar.setRaiz(lis.Suprimir(lis.Primero()))
+        for i in range(lon):
+            ar.Codigos(ar.getraiz(),ora[i])
+       
+
+
+            
