@@ -105,33 +105,38 @@ class menu():
         print(" --------------------")
         print("\n MUESTRA EN PREORDEN ")
         ar.preorden(raiz)
+        
         op=input("¿Desea mostrar su codificacion en binario?\n Y o N\n")
         while op.upper()!='N' and op.upper()!='Y':
             print ("Opcion invalida")
             op=input("¿Desea mostrar su codificacion en binario?\n Y o N\n")
 
         if op.upper()=='Y':
-            lon=len(ora)
+            prim=lis.Primero()
+            lon=len(prim.getDato())
+            long=len(ora)
             for i in range (lon):
-                fre=self.frecuencia(lon,ora,ora[i])
-                ar.Codigos(raiz,ora[i],fre)
-                lis.mostrar()
+                uncaracter=self.frecuencia(long,ora,ora[i])
+                ar.Codigos(raiz,uncaracter)
+            
+            lis.mostrar(lis.Primero())
     
     def frecuencia(self,long,ora,d):
-
+        uncaracter=caracter(d)
         cont=0
         for i in range (long):
             if d==ora[i]:
                 cont+=1
-        return cont
+        uncaracter.setFrecuencia(cont)       
+        return uncaracter
             
     def generacion(self,ar,ora,lis):
         long=len(ora)
         for i in range(long):
-            uncaracter=caracter(ora[i])
-            cont=self.frecuencia(long,ora,ora[i])
+            
+            uncaracter=self.frecuencia(long,ora,ora[i])
        
-            uncaracter.setFrecuencia(cont)
+            
             if lis.Buscar(uncaracter)==False or lis.Vacio()==True:
   
                 lis.insertar(uncaracter)

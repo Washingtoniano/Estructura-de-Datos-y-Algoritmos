@@ -70,16 +70,50 @@ class Lista_enca():
                 band=True
             return band
                     
-    def mostrar(self):
-        aux=self.__primero
-        while aux!=None:
-            aux.mostrar()
-            aux=aux.getSiguiente()
-    # def codigo(self):
-    #     aux=self.__primero
-    #     while aux!=None:
-    #         D=aux
-    #         otro=aux
-    #         while otro!=None:
+    def mostrar(self,arbol):
+        if self.Vacio()==False:
+            if arbol!=None:
+                self.mostrar(arbol.getIzquierda())
 
+                (arbol.mostrar())
+                self.mostrar(arbol.getDerecha())
+        else:
+            print("Arbol vacio")
+    
+    def Codigos(self,arbol,c):
+        if self.Vacio()!=True:
+            if arbol!=None:
+                dato=c.getDato()
+                izq=False
+                der=False
 
+                if arbol!=c:
+                    i=arbol.getIzquierda().getDato()
+                    j=0
+                    while j<len(i) and izq==False:
+                        if i[j]==dato:
+                            izq=True
+                        j+=1
+                    if izq==True:
+                        c.setCodigo(0)
+                        self.Codigos(arbol.getIzquierda(),c)
+                    else:
+                        d=arbol.getDerecha().getDato()
+
+                        j=0
+                        while j<len(d) and der==False:
+                            if d[j]==dato:
+                                der=True
+                            j+=1
+                        if der==True:
+                            c.setCodigo(1)
+                            self.Codigos(arbol.getDerecha(),c)
+                else:
+                    cod=c.getCodigo()
+                    for i in range (len(cod)):
+                        arbol.setCodigo(cod[i])
+
+    def restar(self):
+        self.__primero =None
+        self.__ultimo=None
+        self.__cant=0

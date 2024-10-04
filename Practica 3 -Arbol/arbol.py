@@ -313,33 +313,38 @@ class arbol():
             elif unnodo.getDato()>self.__raiz:
                 unnodo.setIzquierda(self.__raiz)
                 self.__raiz=unnodo
-    def Codigos(self,arbol,c,fre):
+    def Codigos(self,arbol,c):
         if self.vacio()!=True:
             if arbol!=None:
-                dato=arbol.getDato()
+                dato=c.getDato()
                 izq=False
                 der=False
-                i=arbol.getIzquierda().getDato()
-                d=arbol.getDerecha().getDato()
-                if dato!=c:
+
+                if arbol!=c:
+                    i=arbol.getIzquierda().getDato()
                     j=0
                     while j<len(i) and izq==False:
-                        if i[j]==c:
+                        if i[j]==dato:
                             izq=True
                         j+=1
                     if izq==True:
-                        arbol.setCodigo(0)
-                        self.Codigos(arbol.getIzquierda(),c,fre)
+                        c.setCodigo(0)
+                        self.Codigos(arbol.getIzquierda(),c)
                     else:
+                        d=arbol.getDerecha().getDato()
+
                         j=0
                         while j<len(d) and der==False:
-                            if d[j]==c:
+                            if d[j]==dato:
                                 der=True
                             j+=1
                         if der==True:
-                            arbol.setCodigo(1)
-                            self.Codigos(arbol.getDerecha(),c,fre)
-
+                            c.setCodigo(1)
+                            self.Codigos(arbol.getDerecha(),c)
+                else:
+                    cod=c.getCodigo()
+                    for i in range (len(cod)):
+                        arbol.setCodigo(cod[i])
 
 
 
