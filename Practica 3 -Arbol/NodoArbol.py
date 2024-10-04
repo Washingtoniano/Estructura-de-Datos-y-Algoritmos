@@ -1,3 +1,4 @@
+#No sirve eliminar
 from arbol import arbol
 class nodo():
     __dato:arbol

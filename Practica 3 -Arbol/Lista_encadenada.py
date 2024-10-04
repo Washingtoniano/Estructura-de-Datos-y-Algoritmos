@@ -1,9 +1,9 @@
 from caracter import caracter
-from NodoArbol import nodo
 #Lista der arboles
+#Lista de arboles generada por los nodos(no hace uso de la clase arbol)
 class Lista_enca():
-    __primero:nodo
-    __ultimo:nodo
+    __primero:caracter
+    __ultimo:caracter
     __cant:int
     
     def __init__(self):
@@ -12,27 +12,26 @@ class Lista_enca():
         self.__cant=0
     def Vacio(self):
         return self.__cant==0
-    def insertar(self,arbol):
-        unnodo=nodo(arbol)
+    def insertar(self,car):
         if self.Vacio()==True:
-            self.__primero=unnodo
-            self.__ultimo=unnodo
+            self.__primero=car
+            self.__ultimo=car
         else:
-            if self.__primero.getDato().getraiz().getDato().getFrecuencia()>unnodo.getDato().getraiz().getDato().getFrecuencia():
-                unnodo.setSiguiente(self.__primero)
-                self.__primero=unnodo
+            if self.__primero.getFrecuencia()>car.getFrecuencia():
+                car.setSiguiente(self.__primero)
+                self.__primero=car
             else:
                 aux=self.__primero
                 ant=aux
-                while aux!=None and aux.getDato().getraiz().getDato().getFrecuencia()<=unnodo.getDato().getraiz().getDato().getFrecuencia():
+                while aux!=None and aux.getFrecuencia()<car.getFrecuencia():
                     ant=aux
                     aux=aux.getSiguiente()
                 if aux==None:
-                    ant.setSiguiente(unnodo)
-                    self.__ultimo=unnodo
+                    ant.setSiguiente(car)
+                    self.__ultimo=car
                 else:
-                    unnodo.setSiguiente(ant.getSiguiente())
-                    ant.setSiguiente(unnodo)
+                    car.setSiguiente(ant.getSiguiente())
+                    ant.setSiguiente(car)
 
         self.__cant+=1
     def Uno(self):
@@ -61,6 +60,26 @@ class Lista_enca():
             return borrado
         else:
             print("Lista vacia")
+    def Buscar(self,dato):
+        if self.Vacio()==False:
+            band=False
+            aux=self.__primero
+            while aux!=None and aux!=dato:
+                aux=aux.getSiguiente()
+            if aux!=None:
+                band=True
+            return band
                     
+    def mostrar(self):
+        aux=self.__primero
+        while aux!=None:
+            aux.mostrar()
+            aux=aux.getSiguiente()
+    # def codigo(self):
+    #     aux=self.__primero
+    #     while aux!=None:
+    #         D=aux
+    #         otro=aux
+    #         while otro!=None:
 
 

@@ -49,11 +49,13 @@ class menu():
         borrar=0
         try:
             borrar=int(input("Ingrese el dato a borrar "))
+            if ar.Buscar(x,borrar):
+                ar.suprimir(x,borrar)
+                print("Dato borrado:",borrar)
         except ValueError:
             print("Se esperaba un numero")
-        if ar.Buscar(x,borrar):
-            ar.suprimir(x,borrar)
-            print("Dato borrado:",borrar)
+   
+
 
         print("______")
         print("Preorden")
@@ -88,54 +90,67 @@ class menu():
 
     def opcion3(self,ar):
         #Usar lista ordenada, modificar el nodo con caracter y lista de arboles
+        lis=Lista_enca()
+
         ora=input("Ingrese una oracion ")
-        self.generacion(ar,ora)
+        ora=ora.upper()
+        self.generacion(ar,ora,lis)
         print("Arbol generado")
         print(" MUESTRA EN INORDEN ")
-        ar.inorden(ar.getraiz())
+        raiz=ar.getraiz().getDato()
+        ar.inorden(raiz)
         print("\n --------------------")
         print("\n MUESTRA EN POSTORDEN ")
-        ar.postorden(ar.getraiz())
+        ar.postorden(raiz)
         print(" --------------------")
         print("\n MUESTRA EN PREORDEN ")
-        ar.preorden(ar.getraiz())
-        op=input("Que desea hacer")
-    def generacion(self,ar,ora):
-        lis=Lista_enca()
+        ar.preorden(raiz)
+        op=input("¿Desea mostrar su codificacion en binario?\n Y o N\n")
+        while op.upper()!='N' and op.upper()!='Y':
+            print ("Opcion invalida")
+            op=input("¿Desea mostrar su codificacion en binario?\n Y o N\n")
+
+        if op.upper()=='Y':
+            lon=len(ora)
+            for i in range (lon):
+                fre=self.frecuencia(lon,ora,ora[i])
+                ar.Codigos(raiz,ora[i],fre)
+                lis.mostrar()
+    
+    def frecuencia(self,long,ora,d):
+
+        cont=0
+        for i in range (long):
+            if d==ora[i]:
+                cont+=1
+        return cont
+            
+    def generacion(self,ar,ora,lis):
         long=len(ora)
-        for j in range(long):
-            uncaracter=caracter(ora[j])
-            cont=0
-            for i in range (long):
-                if ora[i]==ora[j]:
-                    cont+=1
+        for i in range(long):
+            uncaracter=caracter(ora[i])
+            cont=self.frecuencia(long,ora,ora[i])
+       
             uncaracter.setFrecuencia(cont)
-            are=arbol()
-            are.insertar(are.getraiz(),uncaracter)
-            lis.insertar(are)
+            if lis.Buscar(uncaracter)==False or lis.Vacio()==True:
+  
+                lis.insertar(uncaracter)
         while lis.Uno()==False:
             primero=lis.Suprimir(lis.Primero())
             segundo=lis.Suprimir(lis.Primero())
-            x=ar.getraiz()
-            if x==None:
-                total=primero.getDato().getraiz().getDato().getCaracter()+segundo.getDato().getraiz().getDato().getCaracter()
-                fre=primero.getDato().getraiz().getDato().getFrecuencia()+segundo.getDato().getraiz().getDato().getFrecuencia()
+            #print(primero.getCaracter())
+            #print(segundo.getCaracter())
 
-            else:
-                total+=primero.getDato().getraiz().getDato().getCaracter()+segundo.getDato().getraiz().getDato().getCaracter()
-                fre=primero.getDato().getraiz().getDato().getFrecuencia()+segundo.getDato().getraiz().getDato().getFrecuencia()+x.getDato().getFrecuencia()
+            nuevo=caracter(primero.getDato()+segundo.getDato())
+            nuevo.setIzquierda(primero)
+            nuevo.setDerecha(segundo)
+          
+            fre=primero.getFrecuencia()+segundo.getFrecuencia()
 
-            nuevo=caracter(total)
 
             nuevo.setFrecuencia(fre)
-            print(primero.getDato().getraiz().getDato())
-       
-            ar.setRaiz(nuevo)
-            ar.insertar(ar.getraiz(),segundo.getDato().getraiz().getDato())
-            ar.insertar(ar.getraiz(),primero.getDato().getraiz().getDato())
-            lis.insertar(ar)
-        prm=lis.Suprimir(lis.Primero())
-        ar.setRaiz(prm.getDato().getraiz().getDato())
+            lis.insertar(nuevo)
+        ar.setRaiz(lis.Primero())
 
 
             
