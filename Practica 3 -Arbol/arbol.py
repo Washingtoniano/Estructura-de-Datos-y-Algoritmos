@@ -299,7 +299,8 @@ class arbol():
         else:
             print("Dato cargado")
 
-
+    def restart(self):
+        self.__raiz=None
    
     def setRaiz(self,dato):
         unnodo=nodo(dato)

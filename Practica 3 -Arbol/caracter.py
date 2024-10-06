@@ -33,19 +33,24 @@ class caracter():
         self.__frecuencia=d
     def setCodigo(self,bi):
         self.__codigo.append(bi)
-        print(bi)
-        print(self.__codigo[0])
+        #print(bi)
+        #print(self.__codigo[0])
     def setDerecha(self,der):
         self.__derecha=der
     def setIzquierda(self,iz):
         self.__izquierda=iz
     def mostrar(self):
-        print("\nCaracter:{} Frecuencia {} Codigo:".format(self.getDato(),self.getFrecuencia()))
+        cod=None
         li=self.getCodigo()
+        lon=len(li)
         i=0
-        while i <len(li):
-            print(li[i],end='')
+        if lon>0:
+            cod=li[i]
             i+=1
+            while i <lon:
+                cod=cod+li[i]
+        print("\nCaracter:{} Frecuencia {} Codigo:{}".format(self.getDato(),self.getFrecuencia(),cod))
+
 
 
     def __str__(self) -> str:

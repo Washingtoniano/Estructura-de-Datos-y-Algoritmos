@@ -91,10 +91,10 @@ class menu():
     def opcion3(self,ar):
         #Usar lista ordenada, modificar el nodo con caracter y lista de arboles
         lis=Lista_enca()
-
         ora=input("Ingrese una oracion ")
         ora=ora.upper()
         self.generacion(ar,ora,lis)
+            
         print("Arbol generado")
         print(" MUESTRA EN INORDEN ")
         raiz=ar.getraiz().getDato()
@@ -106,20 +106,28 @@ class menu():
         print("\n MUESTRA EN PREORDEN ")
         ar.preorden(raiz)
         
-        op=input("¿Desea mostrar su codificacion en binario?\n Y o N\n")
-        while op.upper()!='N' and op.upper()!='Y':
+        op=input("¿Desea mostrar su codificacion en binario o decodificar? \n C o D S-Salir\n")
+        prim=lis.Primero()
+        lon=len(prim.getDato())
+        long=len(ora)
+        for i in range (lon):
+            uncaracter=self.frecuencia(long,ora,prim.getDato()[i])
+            ar.Codigos(raiz,uncaracter)
+            
+        while op.upper()!='D' and op.upper()!='C' and op.upper()!='S':
             print ("Opcion invalida")
-            op=input("¿Desea mostrar su codificacion en binario?\n Y o N\n")
+            op=input("¿Desea mostrar su codificacion en binario o decodificar? \n C o D S-Salir\n")
 
-        if op.upper()=='Y':
-            prim=lis.Primero()
-            lon=len(prim.getDato())
-            long=len(ora)
-            for i in range (lon):
-                uncaracter=self.frecuencia(long,ora,ora[i])
-                ar.Codigos(raiz,uncaracter)
+        if op.upper()=='C':
             
             lis.mostrar(lis.Primero())
+        elif op.upper()=='D':
+            dec=input("Ingrese los datos a decodificar en binario ()")
+            i=0
+            d=-1
+            lis.decodifcar(prim,dec,d)
+        lis.restar()
+        ar.restart()
     
     def frecuencia(self,long,ora,d):
         uncaracter=caracter(d)

@@ -23,7 +23,8 @@ class Lista_enca():
             else:
                 aux=self.__primero
                 ant=aux
-                while aux!=None and aux.getFrecuencia()<car.getFrecuencia():
+                #menor o menor igual?
+                while aux!=None and aux.getFrecuencia()<=car.getFrecuencia():
                     ant=aux
                     aux=aux.getSiguiente()
                 if aux==None:
@@ -81,6 +82,7 @@ class Lista_enca():
             print("Arbol vacio")
     
     def Codigos(self,arbol,c):
+        #Probar utilizar el largo de la cadena, para evitar el error del NONE
         if self.Vacio()!=True:
             if arbol!=None:
                 dato=c.getDato()
@@ -112,6 +114,37 @@ class Lista_enca():
                     cod=c.getCodigo()
                     for i in range (len(cod)):
                         arbol.setCodigo(cod[i])
+    def decodifcar(self,arbol,cod,i):
+    
+        p=len(cod)
+        band=False
+        con=p
+        while  p> i and band==False :
+                ant=arbol
+                d=i+1
+                if p-1==i:
+                    d=i
+              #  print(cod[d])
+                if cod[d]!='1' and cod[d]!='0':
+                        print("Dato no binario")
+                        band=True
+                else:
+                    if len(ant.getDato())!=1:
+                            if  cod[d]=='0':
+                                arbol=arbol.getIzquierda()
+
+                            elif  cod[d]=='1': 
+                                arbol=arbol.getDerecha()
+                            i+=1 
+                          
+                    else:
+                        print (ant.getDato())
+                        con-=1
+                if p> i and len(ant.getDato()) ==1:
+                    arbol=(self.Primero())
+       # print(arbol.getDato())
+                                
+
 
     def restar(self):
         self.__primero =None
