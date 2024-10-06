@@ -96,7 +96,7 @@ class menu():
     def opcion2(self,cola):
         import numpy as np
 
-
+        #Para mejorar el codigo, se puede hacer un arreglo con las cajas (clase caja, con sus colas, banderas y tiempo de cajero )
         cajer1=0  #5
         col1=ColaEnca()
         cajer2=0  #3
