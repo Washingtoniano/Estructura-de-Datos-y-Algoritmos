@@ -18,7 +18,7 @@ class hash():
         dir=self.hash(clave)
         while self.__arreglo[dir]!=None and cont !=self.__m:
             cont+=1
-            dir=self.hash(dir-1)
+            dir=self.hash(dir+1)
         if cont!=self.__m:
             self.__arreglo[dir]=clave
             print( self.__arreglo[dir])

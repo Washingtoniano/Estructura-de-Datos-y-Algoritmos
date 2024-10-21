@@ -69,7 +69,7 @@ class hash():
                         i+=1
                         j=0
                 if i<self.__filas:
-                    p=("Se encontro el elemento {} en la posicion {}x{}del overflow".format(clave,i,j)) 
+                    p=("Se encontro el elemento {} en la posicion {} x {}del overflow".format(clave,i,j)) 
         print(p)
 
     def mostrar(self):
@@ -80,3 +80,4 @@ class hash():
             for j in range(self.__columnas):
                 print(f'{self.__tabla[i][j]}',end=' ')
             print('\n')
+
