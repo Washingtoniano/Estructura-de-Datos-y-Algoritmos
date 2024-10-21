@@ -1,3 +1,4 @@
+#Encadenado
 import numpy as np
 from nodo import nodo
 class hash():
