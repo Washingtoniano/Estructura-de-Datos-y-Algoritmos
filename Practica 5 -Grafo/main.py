@@ -12,5 +12,12 @@ if __name__=='__main__':
         j=int(input("Nodo j: "))
         
     ungrafo.mostrar()
-    N=int(input("Ingrese el nodo que desea comprobar su adyacencia"))
-    ungrafo.adyacentes(N)
+    #N=int(input("Ingrese el nodo que desea comprobar su adyacencia"))
+    #ungrafo.adyacentes(N)
+    print("Ingrese los nodos para ver el camino (i)")
+    i=int(input("Nodo i: "))
+    j=int(input("Nodo j: "))
+    ungrafo.camino(i,j)
+    
+    print("Grafo conexo ",ungrafo.conexo())
+    ungrafo.aciclico()
