@@ -1,4 +1,6 @@
 import numpy as np
+from lista import lista
+
 from nodo import nodo
 #Secuecial
 #Adyacencia
@@ -9,15 +11,23 @@ from nodo import nodo
 class grafo():
     __vertices:int
     __matriz:np.ndarray
-    def __init__(self,ver) -> None:
+    __pesos:bool
+    def __init__(self,ver,d=False) -> None:
         self.__vertices=ver
         self.__matriz=np.empty(ver,dtype=object)
         for i in range(self.__vertices):
             self.__matriz[i]=np.zeros(ver,dtype=int)
+        self.__pesos=d
     def relacion(self,i,j):
         if self.verificar(i) and self.verificar(j):
             self.__matriz[i-1][j-1]=1
             self.__matriz[j-1][i-1]=1
+    def pesos(self,i,j,cant):
+        if self.verificar(i) and self.verificar(j):
+            self.__matriz[i-1][j-1]=cant
+            self.__matriz[j-1][i-1]=cant
+ 
+
     def verificar(self,i):
         return i<=self.__vertices and i>0
     def mostrar(self):
@@ -110,7 +120,6 @@ class grafo():
     # hacerlo iterativo usar los metodos en la teoria (BEP,BEA)
     def camino(self,u,v):
         if self.verificar(u) and self.verificar(v):
-            from lista import lista
             unalista=lista()
             b=False
             i=u-1
@@ -136,6 +145,7 @@ class grafo():
                 else:
                     print("No hay camino")
                 unalista.reset()
+            return b
 
     def grado(self,n):
         if self.verificar(n):
@@ -160,11 +170,12 @@ class grafo():
                 j+=1
             i+=1
         return band
-    def aciclico(self):
+    
+    def aciclico(self): #No funciona
         i=0
         band=False
         while i <self.__vertices and band==False:
-            band=self.camino(i,i)
+            band=self.camino(i+1,i+1)
             i+=1
         if band ==False:
             print("El grafo no presenta ciclos")
@@ -172,7 +183,7 @@ class grafo():
             print("EL grafo presenta ciclos")
          
     def BEA(self,o):
-        arreglo=np.ndarray(self.__vertices,detype=object)
+        arreglo=np.ndarray(self.__vertices,dtype=object)
         for i in range (self.__vertices):
             arreglo[i]=None
         arreglo[o-1]=0
@@ -186,24 +197,71 @@ class grafo():
                     if arreglo[i]==None:
                         arreglo[i]=arreglo[a]+1
                         cola.insertar(arreglo[i]+1)
-    def visita(self,u,tiempo,ar):
+        print("Busqueda BEA")
+        for i in range(self.__vertices):
+            print(f'[{i+1}]',end=' ')
+            print(f'{arreglo[i]}',end=' ')
+            print('')
+    def visita(self,u,tiempo,ar,ar2):
         tiempo=tiempo+1
         ar[u]=tiempo
         for i in range(self.__vertices):
             if self.__matriz[u][i]==1:
                 if ar[i]==0:
-                    self.visita(i,tiempo,ar)
+                    self.visita(i,tiempo,ar,ar2)
         tiempo=tiempo+1
+        ar2[u]=tiempo
+        print("Tiempo total en visita:",tiempo)
         #2 arreglos - ida y vuelta- problema con nodo fuente
 
     def BEP(self):
-        arreglo=np.ndarray(self.__vertices,detype=object)
+        arreglo=np.ndarray(self.__vertices,dtype=object)
+        arreglo2=np.ndarray(self.__vertices,dtype=object)
         for i in range(self.__vertices):
             arreglo[i]=0
+            arreglo2[i]=0
         tiempo =0
         for i in range(self.__vertices):
             if arreglo[i]==0:
-                self.visita(i,tiempo,arreglo)
+                self.visita(i,tiempo,arreglo,arreglo2)
+        print("Los nodo presentan un tiempo de:")
+        for i in range(self.__vertices):
+            print("Nodo {}, Tiempo de ida: {} Tiempo de vuelta: {} \n".format(i+1,arreglo[i],arreglo2[i]) )
+        print("Tiempo total:",tiempo)
+
+#DIGRAFO
+    def CantEntradas(self,i):
+        if self.verificar(i):
+            cont=0
+            for j in range(self.__vertices):
+                if self.__matriz[j][i]==1:
+                    cont+=1
+            return cont
+    def CantSalidas(self,i):
+        if self.verificar(i):
+            cont=0
+            for j in range(self.__vertices):
+                if self.__matriz[i][j]==1:
+                    cont+=1
+            return cont
+    def Fuente(self,i):
+        if self.verificar(i):
+            band=False
+            s=self.CantSalidas(i)
+            e=self.CantEntradas(i)
+            if e==0 and s!=0:
+                band=True
+            return band
+    def Sumidero(self,i):
+        if self.verificar(i):
+            band=False
+            s=self.CantSalidas(i)
+            e=self.CantEntradas(i)
+            if e!=0 and s==0:
+                band=True
+            return band
+
+
 
 
 

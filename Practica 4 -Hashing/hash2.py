@@ -9,7 +9,7 @@ class hash():
     def __init__(self,colision,cla=1000) -> None:
         self.__cant=cla
         self.__col=colision
-        self.__dim=cla//self.__col
+        self.__dim=int(cla//colision)
         self.__arreglo=np.empty((self.__dim),dtype=nodo)
 
     def hash(self,clave):

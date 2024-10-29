@@ -4,8 +4,6 @@
 def dividir(cla,di):
     return cla%di
 
-def dividir(CC,d):
-    return CC//d
 
 def extraccion(cla,di,CC):
     #¿Cantidad de claves // en la dimnsion de la tabla?
@@ -33,7 +31,7 @@ def plegado(cla,di,CC):
     cla=cla-ne
     cla=int(cla)
     total=cla+int(ne)
-    return total//di
+    return total&di
         
 
 

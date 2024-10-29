@@ -1,10 +1,10 @@
-from hash3 import hash
+from hash2 import hash
 import random
 import string
 if __name__=='__main__':
     a=int(input("Ingrese las colisiones esperadas: "))
     n=int(input("Ingrese la cantidad de claves: "))
-    h=hash(n,a)
+    h=hash(a,n)
     cont=0
 #    for i in range(n):
 #        h.insertar(i)

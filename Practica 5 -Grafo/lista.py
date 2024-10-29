@@ -20,6 +20,7 @@ class lista():
     
     def eliminar(self):
         aux=self.__comienzo
+        ant=aux
         while aux.getSig()!=None:
             ant=aux
             aux=aux.getSig()

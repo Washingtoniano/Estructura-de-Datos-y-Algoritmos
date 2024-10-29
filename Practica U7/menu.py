@@ -1,3 +1,4 @@
+from trabajo import trabajo
 class menu():
     __switcher:None
     def __init__(self) -> None:
@@ -8,17 +9,20 @@ class menu():
 
 
         }
-    def opcion(self,op):
-        fun=self.__switcher.get(op,lambda:print("Opcion invalida"))
-        if fun=='1' or fun=='2' or fun=='3' or fun=='4':
-            fun()
+    def opcion(self,op,untra):
+        if type(untra)==trabajo:
+            fun=self.__switcher.get(op,lambda:print("Opcion invalida"))
+            if fun=='1' or fun=='2' or fun=='3' or fun=='4':
+                fun(untra)
+            else:
+                fun()
         else:
-            fun()
-    def opcion1(self): #Binario
+            print("Dato no permitido")
+    def opcion1(self,untra): #Binario
         pass
-    def opcion2(self): #Mayusucula
+    def opcion2(self,untra): #Mayusucula
         pass
-    def opcion3(self): #minuscula
+    def opcion3(self,untra): #minuscula
         pass
-    def opcion4(self):
+    def opcion4(self,untra):
         pass
