@@ -2,9 +2,11 @@ from nodo import nodo
 class lista():
     __comienzo:nodo
     __cant:int
+    __ultimo:nodo
     def __init__(self):
         self.__comienzo=None
         self.__cant=0
+        self.__ultimo=None
     def insertar(self,n):
         unnodo=nodo(n)
         if self.__comienzo==None:
@@ -16,6 +18,7 @@ class lista():
                 aux=aux.getSig()
             unnodo.setSig(aux.getSig())
             aux.setSig(unnodo)
+        self.__ultimo=unnodo
         self.__cant+=1
     
     def eliminar(self):
@@ -49,6 +52,8 @@ class lista():
         print("\n")
     def reset(self):
         self.__comienzo=None
+    def getUltimo(self):
+        return self.__ultimo.getDato()
 
 
 

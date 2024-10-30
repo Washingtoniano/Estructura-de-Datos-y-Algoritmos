@@ -24,8 +24,8 @@ if __name__=='__main__':
         j=int(input("Nodo j: "))
         
     ungrafo.mostrar()
-    ungrafo.BEA(1)
-    ungrafo.BEP()
+    #ungrafo.BEA(1)
+    #ungrafo.BEP()
     N=int(input("Ingrese el nodo que desea comprobar su adyacencia"))
     ungrafo.adyacentes(N)
     print("Ingrese los nodos para ver el camino (i)")
@@ -35,3 +35,9 @@ if __name__=='__main__':
     
     print("Grafo conexo ",ungrafo.conexo())
     ungrafo.aciclico()
+    N=int(input("Ingrese un nodo cuyas entradas dese averiguar: "))
+    print("El nodo",N,"posee",ungrafo.CantEntradas(N),"entradas")
+    N=int(input("Ingrese un nodo cuyas salidas dese averiguar: "))
+    print("El nodo",N,"posee",ungrafo.CantSalidas(N),"Salidas")
+    print("¿El nodo",N,"es sumidero?->",ungrafo.Sumidero(N))
+    print("¿El nodo",N,"es fuente?->",ungrafo.Fuente(N))

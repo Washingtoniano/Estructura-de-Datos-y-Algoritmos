@@ -18,7 +18,7 @@ class hash():
         dir=self.hash(clave)
         while self.__arreglo[dir]!=None and cont !=self.__m:
             cont+=1
-            dir=self.hash(dir+1)
+            dir=(dir+1)%self.__m
         if cont!=self.__m:
             self.__arreglo[dir]=clave
             print( self.__arreglo[dir])
@@ -42,4 +42,44 @@ class hash():
     def mostrar(self):
         for i in range(len(self.__arreglo)):
             print(self.__arreglo[i])
+
+    def conversion(self,clave):
+        n=0
+        clave=str(clave)
+        lon=len(clave)
+        for i in range(lon):
+            n+=clave[i]
+        return n
+    
+    
+    def primo(self,clave):
+        i=1
+        con=1
+        print("Clave",clave)
+        for i in range(2,10):
+            r=clave%i
+            if r==0 and i!=clave:
+                con+=1
+        print("r:",r)
+        if con!= 1:
+            band=False
+            prim=self.conversion(clave)
+            print("prim:",prim)
+            while band==False:
+                con=1
+                prim+=1
+                print("prim:",prim)
+
+                for i in range(2,10):
+                    r=prim%i
+                    if r==0 and i!=clave:
+                        con+=1
+                print("prim:",prim)
+                print("r:",r)
+
+                if con==1:
+                    band=True
             
+
+
+

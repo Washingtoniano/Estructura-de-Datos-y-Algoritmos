@@ -11,17 +11,18 @@ from nodo import nodo
 class grafo():
     __vertices:int
     __matriz:np.ndarray
-    __pesos:bool
+    __dirigido:bool
     def __init__(self,ver,d=False) -> None:
         self.__vertices=ver
         self.__matriz=np.empty(ver,dtype=object)
         for i in range(self.__vertices):
             self.__matriz[i]=np.zeros(ver,dtype=int)
-        self.__pesos=d
+        self.__dirigido=d
     def relacion(self,i,j):
         if self.verificar(i) and self.verificar(j):
             self.__matriz[i-1][j-1]=1
-            self.__matriz[j-1][i-1]=1
+            if self.__dirigido==False:
+                self.__matriz[j-1][i-1]=1
     def pesos(self,i,j,cant):
         if self.verificar(i) and self.verificar(j):
             self.__matriz[i-1][j-1]=cant
@@ -91,24 +92,27 @@ class grafo():
     #Nota (Solucionar): existe la posibilidad que se produsca un ciclo si hay mas de un salto, por ejemplo 1-2-3-5-2 el primero evita e¿la vuelta a 1 el o la vuelta a 3 pero no hay forma de evitar la vuelta a 2. 
     def recursiva(self,i,j,l,p,o):
         if i< self.__vertices:
-            if i ==j: #evita ciclo
-                j+=1
             if l.primero()-1==j:#evita que vuelva al primero
                 j+=1
             if j==o: #evita que vuelva al anterior
                 j+=1
+            if i ==j: #evita ciclo
+                j+=1
+
+
             if j<self.__vertices:
                 if self.__matriz[i][p]==1: ##Comprueba posicin
                     band=True
 
                 else:
+
                     if self.__matriz[i][j]!=1: #Se mueve por las columnas
                         j+=1
                         band=self.recursiva(i,j,l,p,o)
                     else:
-                        
                         b=i
-                        l.insertar(j+1)
+                        h=j+1
+                        l.insertar(h)
                         band=self.recursiva(j,0,l,p,b) #se mueve por las filas
                         if band==False:
                             l.eliminar()
@@ -132,14 +136,19 @@ class grafo():
                 d=0
                 while d<self.__vertices and b==False:
                     if i!=d:
-                        unalista.insertar(d+1)
-                        b=self.recursiva(d,0,unalista,j,i)
-                        #b=self.recursiva2(d,0,l,j)
-                        if b==False:
-                            unalista.eliminar()
+                        #unalista.insertar(d+1)
+                        b=self.recursiva(i,d,unalista,j,i)
+                    #b=self.recursiva2(d,0,l,j)
+                    if b==False:
+                        unalista.eliminar()
          
                     d+=1
                 if b==True:
+                    ulti= unalista.getUltimo()
+                    if self.__matriz[ulti-1][i]==1:
+                        unalista.reset()
+                        unalista.insertar(u)
+                        unalista.insertar(ulti)
                     unalista.insertar(v)
                     unalista.mostrar()
                 else:
@@ -233,15 +242,17 @@ class grafo():
     def CantEntradas(self,i):
         if self.verificar(i):
             cont=0
+            d=i-1
             for j in range(self.__vertices):
-                if self.__matriz[j][i]==1:
+                if self.__matriz[j][d]==1:
                     cont+=1
             return cont
     def CantSalidas(self,i):
         if self.verificar(i):
             cont=0
+            d=i-1
             for j in range(self.__vertices):
-                if self.__matriz[i][j]==1:
+                if self.__matriz[d][j]==1:
                     cont+=1
             return cont
     def Fuente(self,i):
