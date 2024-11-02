@@ -40,7 +40,8 @@ class menu():
         x=ar.getraiz()
 
         print("Datos insertados: 5314260879")
-
+        c=ar.descendientes(x,5)
+        print("Cantidad de descendientes del nodo 5",c)
         print("______")
         ar.Hijo(x,5,6)
         ar.Padre(x,5,6)
@@ -111,8 +112,9 @@ class menu():
         lon=len(prim.getDato())
         long=len(ora)
         for i in range (lon):
-            uncaracter=self.frecuencia(long,ora,prim.getDato()[i])
-            ar.Codigos(raiz,uncaracter)
+            uncaracter=self.frecuencia(long,ora,prim.getDato()[i]) #No se pudo crear el codigo mientras se realizaba el arbol, es necesario volver a iterar para crear los codigos
+                                                                    #Como el dato es una cadena, es un arreglo de caracteres
+            lis.Codigos(raiz,uncaracter)
             
         while op.upper()!='D' and op.upper()!='C' and op.upper()!='S':
             print ("Opcion invalida")
@@ -126,8 +128,8 @@ class menu():
             i=0
             d=-1
             lis.decodifcar(prim,dec,d)
-        lis.restar()
-        ar.restart()
+        #lis.restar()
+        #ar.restart()
     
     def frecuencia(self,long,ora,d):
         uncaracter=caracter(d)

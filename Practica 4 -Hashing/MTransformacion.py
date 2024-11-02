@@ -11,7 +11,7 @@ def extraccion(cla,di,CC):
     digits=(CC//di)
     cla=str(cla)
     cla=cla[digits:]
-    return int(cla)
+    return int(cla)%di
 
 
 def cuadradoM(cla,di,CC):
@@ -23,7 +23,7 @@ def cuadradoM(cla,di,CC):
     
     cla=(cla[medio-cant:medio+cant])
 
-    return int(cla)
+    return int(cla)%di
 def plegado(cla,di,CC):
     lon=(CC//di)
     cla=str(cla)
@@ -32,6 +32,6 @@ def plegado(cla,di,CC):
     cla=cla-ne
     cla=int(cla)
     total=cla+int(ne)
-    return total
+    return total%di
 
 

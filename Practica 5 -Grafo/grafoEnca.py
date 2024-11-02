@@ -4,7 +4,7 @@ from nodo import nodo
 class grafo():
     __arreglo:np.ndarray
     __vertices:int
-    __band=bool
+    __band:bool
     def __init__(self,cant,d=False) -> None:
         self.__vertices=cant
         self.__arreglo=np.empty(cant,dtype=nodo)
@@ -24,7 +24,7 @@ class grafo():
         if self.verificar(i) and self.verificar(j):
             ori=self.__arreglo[i-1]
             aux=ori
-            if self.__band==True:
+            if self.__band==False:
                 for d in range(j-1):
                     aux=aux.getSig()
                 aux.setDato(1)
@@ -107,3 +107,5 @@ class grafo():
             if self.CantEntradas(i)!=0 and self.CantSalidas(i)==0:
                 b=True
             return b
+        #wireshark Adyacente
+        #distrack ponderado

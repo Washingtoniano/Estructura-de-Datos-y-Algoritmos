@@ -225,6 +225,24 @@ class arbol():
         else:
             print("Vacio")
         return band
+    def descendientes(self,arbol,nodo):
+        if self.vacio()!=True:
+            p=0
+            if arbol!=None:
+                if arbol.getDato()==nodo:
+                    p=self.cont(arbol,p)-1
+                elif arbol.getDato()<nodo:
+                    p=self.descendientes(arbol.getDerecha(),p)
+                elif arbol.getDato()>nodo:
+                    p=self.descendientes(arbol.getIzquierda(),p)
+            return p
+
+    def cont(self,arbol,p):
+        if arbol!=None:
+            p=self.cont(arbol.getIzquierda(),p)
+            p+=1
+            p=self.cont(arbol.getDerecha(),p)
+        return p
 
     def listar(self,arbol,B,lista):
         Dato=False

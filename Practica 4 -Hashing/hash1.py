@@ -9,7 +9,7 @@ class hash():
     __arreglo:np.ndarray
     __m:int
     def __init__(self,N=100) -> None:
-        self.__m=int(N//0.7)
+        self.__m=int(N//0.7) #el m tiene que ser numero primo
         self.__arreglo=np.empty(self.__m,dtype=object)
     def hash(self,clave):
         return clave%self.__m

@@ -3,26 +3,42 @@ class menu():
     __switcher:None
     def __init__(self) -> None:
         self.__switcher={
-                        '1':self.opcion1(),
-                        '2':self.opcion2(),
-                        '3':self.opcion3()
+                        '1':self.opcion1,
+                        '2':self.opcion2,
+                        '3':self.opcion3
 
 
         }
     def opcion(self,op,untra):
         if type(untra)==trabajo:
             fun=self.__switcher.get(op,lambda:print("Opcion invalida"))
-            if fun=='1' or fun=='2' or fun=='3' or fun=='4':
+            if op=='1' or op=='2' or op=='3' or op=='4':
                 fun(untra)
             else:
                 fun()
         else:
             print("Dato no permitido")
-    def opcion1(self,untra): #Binario
-        pass
-    def opcion2(self,untra): #Mayusucula
-        pass
-    def opcion3(self,untra): #minuscula
-        pass
+    def inicializar(self,untra,cadena):
+        untra.inicializar(cadena)
+    def submenu(self,op,untra):
+        if op=='1':
+            print("Codigo")
+            untra.MCodigo()
+        elif op=='2':
+            cadena=input("Ingrese una secuencia binaria\n")
+            untra.deco(cadena)
+
+    def opcion1(self,untra): #Binario:
+        om=input(" 1-Ver codigo de las letras de la cadena ongresada\n 2-Decodificar una secuencia binaria\n 0-Salir")
+        while om!='0':
+            self.submenu(om,untra)
+            om=input(" 1-Ver codigo de las letras de la cadena ongresada\n 2-Decodificar una secuencia binaria\n 0-Salir")
+
+
+        
+    def opcion2(self,untra): #Mayusucula posicion 2
+        untra.Mayuscula()
+    def opcion3(self,untra): #minuscula posicion 3
+        untra.Minuscula()
     def opcion4(self,untra):
         pass

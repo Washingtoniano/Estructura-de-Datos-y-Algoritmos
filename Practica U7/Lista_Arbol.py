@@ -143,10 +143,18 @@ class Lista_enca():
                 if p> i and len(ant.getDato()) ==1:
                     arbol=(self.Primero())
        # print(arbol.getDato())
+    def getCant(self):
+        return self.__cant
+    def hojas(self,arbol,l):
+        if arbol!=None:
+            if arbol.grado()==0:
+                ne=arbol
+                ne.setSiguiente(None)
+                l.insertar(ne)
+            self.hojas(arbol.getIzquierda(),l)
+
+            self.hojas(arbol.getDerecha(),l)
                                 
-        
-
-
     def restar(self):
         self.__primero =None
         self.__ultimo=None
