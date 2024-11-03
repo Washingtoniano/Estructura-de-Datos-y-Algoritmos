@@ -4,21 +4,21 @@ class caracter():
     __siguiente:object
     __carac:str
     __frecuencia:int
-    __codigo:list
+    __codigo:str
     __izquierda:object
     __derecha:object
 
     def __init__(self,ca):
         self.__carac=ca
         self.__frecuencia=0
-        self.__codigo=[]
+        self.__codigo=None
         self.__siguiente=None
         self.__izquierda=None
         self.__derecha=None
     def getCodigo(self):
-        h=str(self.__codigo[0])
-        for i in range(1,len(self.__codigo)):
-            h+=str(self.__codigo[i])
+        h=str(self.__codigo)
+        #for i in range(1,len(self.__codigo)):
+        #    h+=str(self.__codigo[i])
         return (h)
     def getFrecuencia(self):
         return (self.__frecuencia)
@@ -35,7 +35,11 @@ class caracter():
     def setFrecuencia(self,d):
         self.__frecuencia=d
     def setCodigo(self,bi):
-        self.__codigo.append(bi)
+        if self.__codigo==None:
+            self.__codigo=bi
+        else:
+            self.__codigo+=bi
+        #self.__codigo.append(bi)
         #print(bi)
         #print(self.__codigo[0])
     def setDerecha(self,der):

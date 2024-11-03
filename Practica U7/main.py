@@ -9,8 +9,8 @@ if __name__=='__main__':
 
     print("Seleccione la opcion que desea")
     
-    op=input(" 1-Conversion a binario mediante HUffman\n 2-Transformacion en mayuscula\n 3- Transformacion en minuscula\n 4-Eliminacion de un elemento\n 0-Salir\n")
-    while op!=0:
+    op=input(" 1-Conversion a binario mediante HUffman\n 2-Transformacion en mayuscula\n 3-Transformacion en minuscula\n 4-Eliminacion de un elemento\n 0-Salir\n")
+    while op!='0':
         unmenu.opcion(op,untrabajo)
-        op=input(" 1-Conversion a binario mediante HUffman\n 2-Transformacion en mayuscula\n 3- Transformacion en minuscula\n 4-Eliminacion de un elemento\n 0-Salir\n")
+        op=input(" 1-Conversion a binario mediante HUffman\n 2-Transformacion en mayuscula\n 3-Transformacion en minuscula\n 4-Eliminacion de un elemento\n 0-Salir\n")
 

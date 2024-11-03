@@ -29,10 +29,10 @@ class menu():
             untra.deco(cadena)
 
     def opcion1(self,untra): #Binario:
-        om=input(" 1-Ver codigo de las letras de la cadena ongresada\n 2-Decodificar una secuencia binaria\n 0-Salir")
+        om=input("\n 1-Ver codigo de las letras de la cadena ongresada\n 2-Decodificar una secuencia binaria\n 0-Salir\n")
         while om!='0':
             self.submenu(om,untra)
-            om=input(" 1-Ver codigo de las letras de la cadena ongresada\n 2-Decodificar una secuencia binaria\n 0-Salir")
+            om=input("\n 1-Ver codigo de las letras de la cadena ongresada\n 2-Decodificar una secuencia binaria\n 0-Salir\n")
 
 
         

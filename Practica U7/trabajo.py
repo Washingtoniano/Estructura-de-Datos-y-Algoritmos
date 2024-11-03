@@ -1,7 +1,7 @@
 import numpy as np
-from Lista_Arbol import Lista_enca
-from caracter import caracter
-from ListaEncaOrd import lista
+from Lista_Arbol import Lista_enca #Generacion de arbolS
+from caracter import caracter #Nodo Cadena
+from ListaEncaOrd import lista #Obtencion de hojas del arbol(Letras y codigos)
 class trabajo():
     __arreglo:np.ndarray
     __cant:int
@@ -35,30 +35,43 @@ class trabajo():
     def eliminacion(self,cad):
         #4
         pass
-    def seHizo(self,cad,i):
+    def seHizo(self,cad,aux):
         band=False
-        if self.__arreglo[5]!=None:
-            if len(cad) == len(self.__arreglo[5]) :
-                if i<len(cad):
-                    if self.__arreglo[5][i]==cad[i]:
-                        band=self.seHizo(cad,i+1)
+        if aux!=None:
+            cod=aux.getCodigo()
+            if len(cad) == len(cod) :
+                band=True
+  
+                i=0
+                while i <len(cad) and band==True:
+                    if cod[i]!=cad[i]:
+                        band=False
+                    i+=1
+                if band==False:
+                    band=self.seHizo(cad,aux.getSiguiente())
                 else:
-                    band=True
+                    band=aux
         return band
 
 
-
+    def Decifrado(self,aux,cad):
+        if aux.getSiguiente()!=None:
+            self.Decifrado(aux.getSiguiente(),cad)
+        else:
+            aux.setSiguiente(cad)
 
     def deco(self,cad):
         #if self.__arreglo[2]!=None and self.__arreglo[2]==cad:
         #    print("Codigo ya ingresado, decodificacion",)
         if self.comprobacion(cad):
-            if self.seHizo(cad,0)==True:
+            auxi=self.__arreglo[5]
+            dato=self.seHizo(cad,auxi)
+            if dato!=False:
                 print("La operacion ya se realizo, los resultados fueron:")
-                print("Para la secuencia {} el codigo es{}".format(self.__arreglo[5],self.__arreglo[6]))
+                print("Para la secuencia {} el codigo es {}".format(dato.getCodigo(),dato.getDato()))
 
             else:
-                l=[]
+                l=None
                 primero=self.__arreglo[1].getPrimero()
                 m=len(self.__arreglo[1].getPrimero().getCodigo())
                 long=len(cad)
@@ -73,7 +86,10 @@ class trabajo():
                         ne+=cad[j]
                         pri+=str(aux.getCodigo()[j])
                     if pri==ne:
-                        l.append(aux.getDato())
+                        if l==None:
+                            l=aux.getDato()
+                        else:
+                            l+=aux.getDato()
                         i+=m
                     aux=aux.getSiguiente()
                     if aux==None:
@@ -82,14 +98,24 @@ class trabajo():
                 p=str(l)
                 
                 print(p)
-                self.__arreglo[5]=cad
-                self.__arreglo[6]=l
+                #Probar usar los nodos cadenas y generar una lista de nodos con mayor cantidad de datos y menos espacio del arreglo
+                cadena=caracter(l)
+                cadena.setCodigo(cad)
+                if self.__arreglo[5]==None:
+
+                    self.__arreglo[5]=cadena
+                else:
+                    self.Decifrado(auxi,cadena)
+
+                #Comprobar si se puede mostrar el formato mas bonito
         else:
             print("No se pudo decoficar")
 
 
             
     def inicializar(self,cadena):
+        for i in range(self.__cant):
+            self.__arreglo[i]=None
         self.__arreglo[0]=cadena
         self.Mayuscula()
         self.Minuscula()
