@@ -80,17 +80,22 @@ class trabajo():
                 while i<long and aux!=None:
                     m=len(aux.getCodigo())
                     pri=str(aux.getCodigo())
-
-                    ne=cad[i]
-                    for j in range(i+1,m):
-                        ne+=cad[j]
-                        pri+=str(aux.getCodigo()[j])
+                    ne=None
+                    h=i
+                    m=m+h
+                    while h<m and h<long:
+                        if ne==None:
+                            ne=cad[h]
+                        else:
+                            ne+=cad[h]
+                        h+=1
+                        #pri+=str(aux.getCodigo()[j])
                     if pri==ne:
                         if l==None:
                             l=aux.getDato()
                         else:
                             l+=aux.getDato()
-                        i+=m
+                        i=m
                     aux=aux.getSiguiente()
                     if aux==None:
                         aux=primero

@@ -213,17 +213,14 @@ class arbol():
 
     def Operacion(self,arbol,P,H):
         band=False
-        if self.vacio()==False:
-            if arbol!=None:
-                if arbol.getDato()==P:
-                    if arbol.getIzquierda().getDato()==H or arbol.getDerecha().getDato()==H:
-                        band=True
-                elif arbol.getDato()<P:
-                    self.padre(arbol.getDerecha(),P,H)
-                elif arbol.getDato()>P:
-                    self.padre(arbol.getIzquierda(),P,H)
-        else:
-            print("Vacio")
+        if arbol!=None:
+            if arbol.getDato()==P:
+                if arbol.getIzquierda().getDato()==H or arbol.getDerecha().getDato()==H:
+                    band=True
+            elif arbol.getDato()<P:
+                band=self.Operacion(arbol.getDerecha(),P,H)
+            elif arbol.getDato()>P:
+                band=self.Operacion(arbol.getIzquierda(),P,H)
         return band
     def descendientes(self,arbol,nodo):
         if self.vacio()!=True:
@@ -243,6 +240,14 @@ class arbol():
             p+=1
             p=self.cont(arbol.getDerecha(),p)
         return p
+    def BD(self,arbol,band,B):
+        if arbol!=None:
+            if band==False:
+                if arbol.getDato()==B:
+                    band=True
+                band=self.BD(arbol.getIzquierda(),band,B)
+                band=self.BD(arbol.getDerecha(),band,B) 
+        return band
 
     def listar(self,arbol,B,lista):
         Dato=False
@@ -285,7 +290,6 @@ class arbol():
 
     def insertarIterativo(self,dato):
         band=False
-
         unnodo=nodo(dato)
         if self.vacio()==True:
             self.__raiz=unnodo

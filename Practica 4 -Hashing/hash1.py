@@ -35,7 +35,7 @@ class hash():
                 print("El elemento",clave,"se encontro tras",cont,"comparaciones")
                 band=True
             else:
-                dir=self.hash(dir+1)
+                dir=(dir+1)%self.__m
                 cont+=1
         if band==False:
             print("No se encontro el elemento")

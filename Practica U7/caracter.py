@@ -35,6 +35,7 @@ class caracter():
     def setFrecuencia(self,d):
         self.__frecuencia=d
     def setCodigo(self,bi):
+        bi=str(bi)
         if self.__codigo==None:
             self.__codigo=bi
         else:

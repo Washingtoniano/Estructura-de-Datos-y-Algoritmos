@@ -4,7 +4,7 @@ def comprobacion(clave):
     con=1
     print("Clave",clave)
     i=2
-    while i<clave:
+    while i<clave and cont==1:
         r=clave%i
         if r==0 and i!=clave:
             con+=1
