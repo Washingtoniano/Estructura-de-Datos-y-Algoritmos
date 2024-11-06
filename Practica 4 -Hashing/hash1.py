@@ -9,7 +9,7 @@ class hash():
     __arreglo:np.ndarray
     __m:int
     def __init__(self,N=100) -> None:
-        self.__m=int(N//0.7) #el m tiene que ser numero primo
+        self.__m=int(self.primo(N)//0.7) #el m tiene que ser numero primo
         self.__arreglo=np.empty(self.__m,dtype=object)
     def hash(self,clave):
         return clave%self.__m
@@ -43,43 +43,42 @@ class hash():
         for i in range(len(self.__arreglo)):
             print(self.__arreglo[i])
 
-    def conversion(self,clave):
-        n=0
-        clave=str(clave)
-        lon=len(clave)
-        for i in range(lon):
-            n+=clave[i]
-        return n
-    
-    
-    def primo(self,clave):
-        i=1
+    def comprobacion(self,clave):
+        band=False
         con=1
         print("Clave",clave)
-        for i in range(2,10):
+        i=2
+        while i<clave and con==1:
             r=clave%i
             if r==0 and i!=clave:
                 con+=1
-        print("r:",r)
-        if con!= 1:
-            band=False
-            prim=self.conversion(clave)
-            print("prim:",prim)
-            while band==False:
-                con=1
-                prim+=1
-                print("prim:",prim)
-
-                for i in range(2,10):
-                    r=prim%i
-                    if r==0 and i!=clave:
-                        con+=1
-                print("prim:",prim)
-                print("r:",r)
-
-                if con==1:
-                    band=True
+            i+=1
+        if con==1:
+            band=True
+        #print("r:",r)
             
+        return band
+    
+    
+    def primo(self,clave):
+        r=clave
+        if not self.comprobacion(clave):
+            #n=0
+            #clave=str(clave)
+            #lon=len(clave)
+            #for i in range(lon):
+            #    n+=int(clave[i])
+            band=False
+            print("prim:",r)
+            while band==False:
+                r+=1
+                print("prim:",r)
+                if(self.comprobacion(r)):
+                    band=True
+                    #r=n
+                #else:
+                #    n+=1
+        return r
 
 
 
