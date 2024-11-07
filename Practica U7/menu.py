@@ -29,10 +29,10 @@ class menu():
             untra.deco(cadena)
 
     def opcion1(self,untra): #Binario:
-        om=input("\n 1-Ver codigo de las letras de la cadena ongresada\n 2-Decodificar una secuencia binaria\n 0-Salir\n")
+        om=input("\n 1-Ver codigo de las letras de la cadena ingresada\n 2-Decodificar una secuencia binaria\n 0-Salir\n")
         while om!='0':
             self.submenu(om,untra)
-            om=input("\n 1-Ver codigo de las letras de la cadena ongresada\n 2-Decodificar una secuencia binaria\n 0-Salir\n")
+            om=input("\n 1-Ver codigo de las letras de la cadena ingresada\n 2-Decodificar una secuencia binaria\n 0-Salir\n")
 
 
         
@@ -42,3 +42,6 @@ class menu():
         untra.Minuscula()
     def opcion4(self,untra):
         pass
+        #A considerar: cambiar una cadena alterara los datos guardados. El cambio debe ser lo mas optimo posible (revisar teoria)
+        #Se puede guardar la cadena a trabajar y la anterior. Sin embargo, al realizarse el cambio, se deberan guardar tambien los datos asociados a esa cadena.
+        

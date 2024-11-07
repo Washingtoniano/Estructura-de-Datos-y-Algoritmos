@@ -2,6 +2,12 @@ import numpy as np
 from Lista_Arbol import Lista_enca #Generacion de arbolS
 from caracter import caracter #Nodo Cadena
 from ListaEncaOrd import lista #Obtencion de hojas del arbol(Letras y codigos)
+
+#0 _Cadena original
+#1 -Raices del Codigo de Huffman
+#2 -Mayuscula
+#3 -Minuscula
+#4 -Cambio de cadenas
 class trabajo():
     __arreglo:np.ndarray
     __cant:int
@@ -111,8 +117,7 @@ class trabajo():
                     self.__arreglo[5]=cadena
                 else:
                     self.Decifrado(auxi,cadena)
-
-                #Comprobar si se puede mostrar el formato mas bonito
+                    #No es necesario guardar todas la cadenas,
         else:
             print("No se pudo decoficar")
 
@@ -126,7 +131,7 @@ class trabajo():
         self.Minuscula()
         lis=Lista_enca()
         
-        ora=cadena.upper()
+        ora=self.__arreglo[2]
         self.generacion(ora,lis)
         raiz=lis.Primero()
         long=len(raiz.getDato())
