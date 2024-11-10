@@ -28,12 +28,16 @@ class menu():
         elif op=='2':
             cadena=input("Ingrese una secuencia binaria\n")
             untra.deco(cadena)
+        elif op=='3':
+            cadena=input("Ingrese una secuencia (recuerde respetar las letras de la oracion) \n")
+            untra.C(cadena)
+
 
     def opcion1(self,untra): #Binario:
-        om=input("\n 1-Ver codigo de las letras de la cadena ingresada\n 2-Decodificar una secuencia binaria\n 0-Salir\n")
+        om=input("\n 1-Ver codigo de las letras de la cadena ingresada\n 2-Decodificar una secuencia binaria\n 3-Ingresar una secuencia y obtener su binario\n 0-Salir\n")
         while om!='0':
             self.submenu(om,untra)
-            om=input("\n 1-Ver codigo de las letras de la cadena ingresada\n 2-Decodificar una secuencia binaria\n 0-Salir\n")
+            om=input("\n 1-Ver codigo de las letras de la cadena ingresada\n 2-Decodificar una secuencia binaria\n 3-Ingresar un secuencia y obtener su binario\n 0-Salir\n")
 
 
         

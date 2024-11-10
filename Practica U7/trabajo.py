@@ -189,7 +189,56 @@ class trabajo():
             print("No se pudo decoficar")
 
 
-            
+    def codigo(self,dato,c,cod):
+        if dato!=None: 
+            if dato.getDato()!=c:
+                cod=self.codigo(dato.getSiguiente(),c,cod)
+            else:
+                cod=dato.getCodigo()
+        else:
+            cod=False
+        return cod
+    def comCa2(self,pr,c):
+        b=False
+        if pr!=None:
+            if c==pr.getDato():
+                b=True
+            else:
+                b=self.comCa2(pr.getSiguiente(),c)
+        return b
+    def comCa(self,cad):
+        i=0
+        long=len(cad)
+        b=True
+        aux=self.__arreglo[1].getPrimero()
+        while i<long and b==True:
+            b=self.comCa2(aux,cad[i])
+            i+=1
+        return b
+    def C(self,cad):
+        b=self.codificar(cad.upper())
+        if b!=None:
+            print("Codigo binario resultante: ",b)
+        else:
+            print("Error")
+    def codificar(self,cad):
+        if cad.upper()==self.__arreglo[2] and self.__arreglo[6]!=None:
+            print("Cadena actual, codigo=",self.__arreglo[6])
+        if self.comCa(cad):
+            i=0
+            cod=None
+            con=None
+  
+            aux=self.__arreglo[1].getPrimero()
+            while i<len(cad):
+                dig=self.codigo(aux,cad[i],cod)
+                if con==None:
+                    con=dig
+                else:
+                    con+=dig
+
+                i+=1
+            return con   
     def inicializar(self,cadena):
         for i in range(self.__cant):
             self.__arreglo[i]=None
@@ -210,15 +259,8 @@ class trabajo():
         l=lista()
         lis.hojas(raiz,l)
         self.__arreglo[1]=l
-        cod=None
-        con=None
-        for i in self.__arreglo[2]:
-            dig=lis.Codigo(raiz,i,cod)
-            if con==None:
-                con=dig
-            else:
-                con+=dig
-        self.__arreglo[6]=con
+ 
+        self.__arreglo[6]=self.codificar(self.__arreglo[2])
         #print(self.__arreglo[6])    
 
     def frecuencia(self,long,ora,d):
