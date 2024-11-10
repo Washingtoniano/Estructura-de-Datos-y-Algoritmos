@@ -17,14 +17,23 @@ class trabajo():
     def MCodigo(self):
         Codigos=self.__arreglo[1]
         Codigos.mostrar()
-    def comprobacion(self,cad):
+    def comprobacionR(self,cad,j=0):
         band=True
-        j=0
-        while j<len(cad) and band==True:
+        if j<len(cad):
             if cad[j]!='0' and cad[j]!='1':
                 band=False
-            j+=1
+            else:
+                j+=1
+                band=self.comprobacionR(cad,j)
         return band
+    # def comprobacion(self,cad):
+    #     band=True
+    #     j=0
+    #     while j<len(cad) and band==True:
+    #         if cad[j]!='0' and cad[j]!='1':
+    #             band=False
+    #         j+=1
+    #     return band
     def Mayuscula(self):
         if self.__arreglo[2]==None:
             cad=self.__arreglo[0]
@@ -65,11 +74,39 @@ class trabajo():
             self.Decifrado(aux.getSiguiente(),cad)
         else:
             aux.setSiguiente(cad)
+    def decor2(self,h,m,long,ne,cad):
+        if h<m and h<long:
+            if ne==None:
+                ne=cad[h]
+            else:
+                ne+=cad[h]
+            h+=1
+            ne=self.decor2(h,m,long,ne,cad)
+        return ne
+    def decor1(self,i,long,aux,cad,l,primero):
+        if i<long:
+            m=len(aux.getCodigo())
+            pri=str(aux.getCodigo())
+            ne=None
+            h=i
+            m=m+h
+            ne=self.decor2(h,m,long,ne,cad)
+            if pri==ne:
+                if l==None:
+                    l=aux.getDato()
+                else:
+                    l+=aux.getDato()
+                i=m
+            aux=aux.getSiguiente()
+            if aux==None:
+                    aux=primero
+            l=self.decor1(i,long,aux,cad,l,primero)
+        return l
 
     def deco(self,cad):
         #if self.__arreglo[2]!=None and self.__arreglo[2]==cad:
         #    print("Codigo ya ingresado, decodificacion",)
-        if self.comprobacion(cad):
+        if self.comprobacionR(cad):
             auxi=self.__arreglo[5]
             dato=self.seHizo(cad,auxi)
             if dato!=False:
@@ -79,32 +116,33 @@ class trabajo():
             else:
                 l=None
                 primero=self.__arreglo[1].getPrimero()
-                m=len(self.__arreglo[1].getPrimero().getCodigo())
                 long=len(cad)
                 i=0
                 aux=primero
-                while i<long and aux!=None:
-                    m=len(aux.getCodigo())
-                    pri=str(aux.getCodigo())
-                    ne=None
-                    h=i
-                    m=m+h
-                    while h<m and h<long:
-                        if ne==None:
-                            ne=cad[h]
-                        else:
-                            ne+=cad[h]
-                        h+=1
-                        #pri+=str(aux.getCodigo()[j])
-                    if pri==ne:
-                        if l==None:
-                            l=aux.getDato()
-                        else:
-                            l+=aux.getDato()
-                        i=m
-                    aux=aux.getSiguiente()
-                    if aux==None:
-                        aux=primero
+                l=self.decor1(i,long,aux,cad,l,primero)
+                # while i<long and aux!=None:
+                #     m=len(aux.getCodigo())
+                #     pri=str(aux.getCodigo())
+                #     ne=None
+                #     h=i
+                #     m=m+h
+                #     # while h<m and h<long:
+                #     #     if ne==None:
+                #     #         ne=cad[h]
+                #     #     else:
+                #     #         ne+=cad[h]
+                #     #     h+=1
+                #     #     #pri+=str(aux.getCodigo()[j])
+                #     ne=self.decor(h,m,long,ne,cad)
+                #     if pri==ne:
+                #         if l==None:
+                #             l=aux.getDato()
+                #         else:
+                #             l+=aux.getDato()
+                #         i=m
+                #     aux=aux.getSiguiente()
+                #     if aux==None:
+                #         aux=primero
                 print("Codigo")
                 p=str(l)
                 
