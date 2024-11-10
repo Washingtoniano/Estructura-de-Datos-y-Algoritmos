@@ -5,7 +5,8 @@ class menu():
         self.__switcher={
                         '1':self.opcion1,
                         '2':self.opcion2,
-                        '3':self.opcion3
+                        '3':self.opcion3,
+                        '4':self.opcion4
 
 
         }
@@ -40,8 +41,10 @@ class menu():
         untra.Mayuscula()
     def opcion3(self,untra): #minuscula posicion 3
         untra.Minuscula()
+
     def opcion4(self,untra):
-        pass
+        cadena=input("Ingrese la cadena\n")
+        untra.transformacion(cadena)
         #A considerar: cambiar una cadena alterara los datos guardados. El cambio debe ser lo mas optimo posible (revisar teoria)
         #Se puede guardar la cadena a trabajar y la anterior. Sin embargo, al realizarse el cambio, se deberan guardar tambien los datos asociados a esa cadena.
         

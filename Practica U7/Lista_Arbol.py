@@ -114,6 +114,44 @@ class Lista_enca():
                     cod=c.getCodigo()
                     for i in range (len(cod)):
                         arbol.setCodigo(cod[i])
+    def Codigo(self,arbol,c,cod):
+        #Probar utilizar el largo de la cadena, para evitar el error del NONE
+        if self.Vacio()!=True:
+            if arbol!=None:
+                dato=c
+                izq=False
+                der=False
+
+                if arbol!=c:
+                    i=arbol.getIzquierda().getDato()
+                    j=0
+                    while j<len(i) and izq==False:
+                        if i[j]==dato:
+                            izq=True
+                        j+=1
+                    if izq==True:
+                        if cod==None:
+                            cod='0'
+                        else:
+                            cod+='0'
+                        cod=self.Codigo(arbol.getIzquierda(),c,cod)
+                    else:
+                        d=arbol.getDerecha().getDato()
+
+                        j=0
+                        while j<len(d) and der==False:
+                            if d[j]==dato:
+                                der=True
+                            j+=1
+                        if der==True:
+                            if cod==None:
+                                cod='1'
+                            else:
+                                cod+='1'
+                            cod=self.Codigo(arbol.getDerecha(),c,cod)
+            return(cod)
+
+
     def decodifcar(self,arbol,cod,i):
     
         p=len(cod)

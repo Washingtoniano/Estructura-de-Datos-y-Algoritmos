@@ -77,6 +77,11 @@ class caracter():
                 d+=self.__codigo[i]
         return("Caracter:{} Frecuencia {} Codigo {}".format(self.getDato(),self.getFrecuencia(),d))
     def __eq__(self, other) -> bool:
+        h=False
         if type (self)==caracter and type (other)==caracter:
-            return self.getDato()==other.getDato() and self.getFrecuencia()==other.getFrecuencia()
+            h= self.getDato()==other.getDato() and self.getFrecuencia()==other.getFrecuencia()
+        elif type(self)==caracter and type(other)==str:
+            h=self.getDato()==other
+        return h
+
     
